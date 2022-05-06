@@ -1,7 +1,7 @@
 module Main where
 
-import Adventure
-import GameState -- todo 
+import Adventure 
+import Defs.GameState -- todo 
 
-main :: IO ((), GameState)
+main :: IO ()
 main = gameMain 

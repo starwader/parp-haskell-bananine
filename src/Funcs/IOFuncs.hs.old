@@ -1,7 +1,9 @@
-module IOFuncs where
+module Funcs.IOFuncs where
 
-import Locations
-import GameState
+import Defs.Locations
+import Defs.GameState
+
+import Consts.TextConstants
 
 printLines :: [String] -> IO ()
 printLines xs = putStr (unlines xs)
@@ -60,24 +62,15 @@ printDescription s = do {
         "szkieletami i starymi książkami.",
         "Na fotelu zauważasz starego gnoma."
     ];
-    "jkobry" -> printLines [
-        "Wchodzisz do ciemnej i przerażającej jaskini Kobry.",
-        "Wyjście znajduje się na północy." -- inaczej zrobione niż w prologu
-    ];
-    "dziedziniec" -> printLines [
-        "Znajdujesz się przed wejściem fortu,",
-        "które jest po twojej wschodniej stronie.",
-        "Na zachodzie znajduje się ścieżka, z której przyszedłeś."
-    ];
-    "fort" -> printLines [
-        "Znajdujesz się na dziedzińcu fortu.",
-        "Na zachodzie znajduje się wyjście."  -- inaczej niż w prologi
-    ];
-    "kamieniołom" -> printLines [
-        "Stoisz po środku starego kamieniołomu,",
-        "w głębi stoi ornamentna złota skrzynia.",
-        "Na południu znajduje się wyjście."
-    ];
+    "jkobry" -> printLines 
+    "dziedziniec" -> printLines dziedziniecDesc;
+    "fort" -> printLines fortDesc;
+    "kamieniołom" -> printLines kamieniolomDesc;
     _ -> printLines ["Brak opisu"];
-}
+};
+
+--let locationsDataMap = locationsData(newGameState);
+--let newLocationData = findLocationData nextLoc locationsDataMap;
+ --    lift $ printLines $ findLocationData nextLoc locationsData(gameState)
+
 }

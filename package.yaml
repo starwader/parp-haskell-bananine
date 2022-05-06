@@ -25,7 +25,7 @@ dependencies:
 - containers >= 0.6.4.1 && < 0.7
 
 library:
-  source-dirs: src
+    source-dirs: src
 
 executables:
   adventure-exe:

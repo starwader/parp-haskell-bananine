@@ -5,12 +5,16 @@ import Control.Monad.Trans.Class;
 import Control.Monad.Trans.State.Strict;
 import Control.Monad;
 
-import Locations
-import Inventory
-import Npcs
-import TextConstants
-import IOFuncs
-import GameState
+import Defs.Locations
+import Defs.Inventory
+import Defs.Npcs
+import Defs.GameState
+
+import Consts.TextConstants
+import Consts.InitialData
+
+import Funcs.IOFuncs
+import Funcs.MoveFuncs
 
 -- "The Quest of Bananine"
 -- 
@@ -20,9 +24,6 @@ import GameState
 -- Przemysław Rozwałka
 -- 
 -- Projekt PARP 2022L
-
-
--- IO
 
 
     
@@ -43,52 +44,21 @@ gameLoop = do
         "e" -> do gos East
                   gameLoop
          
-        "gdzie jestem" -> do lift $ printDescription s
+        "gdzie jestem" -> do printDescription
                              gameLoop
 
         "koniec" -> return ()
         _ -> do lift $ printLines ["Nieznana komenda", ""]
                 gameLoop 
 
+gameMain :: IO()
 gameMain = do
     printLines introductionText
-    let polankaData = LocationData {
-            npcs = ["Koko", "Bobo"],
-            items = ["AK-74"]
-        }
-    let dzunglaData = LocationData {
-            npcs = [],
-            items = ["banan"]
-        }
     let startGameState = GameState { 
         currentLocation = "dżungla", 
-        locationsData = M.fromList [
-            ("dżungla", dzunglaData), 
-            ("polanka", polankaData)
-        ]
+        locationsData = initialLocationsData
     }
-    printDescription startGameState
+    runStateT printDescription startGameState
     printLines instructionsText
-    runStateT gameLoop startGameState
-
-
-gos :: Direction -> GameStateIOT  
-gos d = do
-    gameState <- get
-    lift $ printDescription gameState
-    let oldLoc = currentLocation(gameState)
-    let nextLocMaybe = go oldLoc d
-    let nextLoc = case nextLocMaybe of {
-        Nothing -> oldLoc;
-        Just x -> x;
-    }
-    modify (\x -> gameState {currentLocation = nextLoc})
-    --gameState { currentLocation = nextLoc  }
-
-teleports :: GameState -> Location -> GameState
-teleports gameState loc = gameState { currentLocation = loc }
-
-
-
-
+    void $ runStateT gameLoop startGameState
 

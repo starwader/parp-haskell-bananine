@@ -1,9 +1,9 @@
-module GameState where
+module Defs.GameState where
 
 import qualified Data.Map.Strict as M
 import Control.Monad.Trans.State.Strict;
 
-import Locations
+import Defs.Locations
 
 data GameState = GameState
      {
