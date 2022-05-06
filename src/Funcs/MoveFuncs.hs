@@ -2,9 +2,14 @@ module Funcs.MoveFuncs where
 
 import Control.Monad.Trans.State.Strict
 import Control.Monad.Trans.Class;
+import qualified Data.Map.Strict as M
 
 import Defs.GameState
 import Defs.Locations
+import Defs.Npcs
+import Defs.Inventory
+import Defs.Interactions
+
 import Funcs.IOFuncs
 
 -- gos - go with GameStateIOT monad - proper implementation of go 
@@ -12,8 +17,9 @@ import Funcs.IOFuncs
 gos :: Direction -> GameStateIOT
 gos d = do
     gameState <- get
-    let oldLoc = currentLocation(gameState)
+    let oldLoc = currentLocation gameState
     let nextLocMaybe = go oldLoc d
+
     case nextLocMaybe of 
          Nothing -> lift $ printLines ["Nie możesz tędy iść", ""] 
          Just nextLoc -> do
@@ -23,3 +29,60 @@ gos d = do
  
 teleports :: GameState -> Location -> GameState
 teleports gameState loc = gameState { currentLocation = loc }
+
+
+interacts :: Interaction -> Maybe String -> GameStateIOT
+interacts interaction safeInteracted = do 
+  case safeInteracted of
+    Nothing -> lift $ printInteractionError interaction
+    Just interacted -> do
+      gameState <- get
+      let loc = currentLocation gameState
+      case findLocationData loc $ locationsData gameState of
+        Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
+        Just locationData -> do
+          case interaction of 
+            Talk -> talks interacted locationData 
+            Drop -> drops interacted locationData 
+            Pickup -> pickups interacted locationData 
+            _ -> lift $ printLines ["Nieprawidłowa interakcja", ""]
+
+talks :: Npc -> LocationData -> GameStateIOT
+talks npc locationData = do 
+  if elem npc $ npcs locationData then 
+    lift $ printLines ["talking"]
+                        -- talk to npc
+  else
+    lift $ printInteractionError Talk
+
+drops :: Item -> LocationData -> GameStateIOT
+drops item locationData = do
+  gameState <- get
+  let inv = inventory gameState
+  if elem item $ inv then do  
+    let newLocationData = locationData {items = item:(items locationData)} 
+    modify (\x -> gameState {
+        inventory = filter (/=item) inv,
+        locationsData = M.insert item newLocationData $ locationsData gameState
+        })
+    lift $ printLines ["Upuściłeś ", item]
+  else
+    lift $ printInteractionError Drop
+
+pickups :: Item -> LocationData -> GameStateIOT
+pickups item locationData = do
+  gameState <- get
+  if elem item $ items locationData then do  
+    let newLocationData = locationData {items = filter (/=item) $ items locationData} 
+    modify (\x -> gameState {
+        inventory = item:(inventory gameState),
+        locationsData = M.insert item newLocationData $ locationsData gameState
+        })
+    lift $ printLines ["Podniosłeś ", item]
+  else
+    lift $ printInteractionError Pickup
+
+
+
+
+  

@@ -24,10 +24,15 @@ introductionText = [
 instructionsText = [
     "Dostępne komendy:",
     "",
-    "n,s,w,e        -- idź w daną stronę",
-    "gdzie jestem   -- wyświetl informacje o miejscu",
-    "pomoc     -- wyświetl to menu",
-    "koniec    -- zakończ grę",
+    "n,s,w,e                -- idź w daną stronę",
+    "gdzie jestem           -- wyświetl informacje o miejscu",
+    "pomoc                  -- wyświetl to menu",
+    "koniec                 -- zakończ grę",
+    "rozmawiaj <Postać>     -- rozmawiaj z postacią",
+    "atakuj <Postać>        -- zaatakuj postać",
+    "ekwipunek              -- wyświetl ekwipunek",
+    "podnieś <Przedmiot>    -- podnieś przedmiot",
+    "upuść <Przedmiot>      -- upuść przedmiot",
     ""
     ]
 

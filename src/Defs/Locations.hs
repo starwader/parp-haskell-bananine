@@ -31,9 +31,7 @@ go a b = Nothing
 -- location data
    
 findLocationData :: Location -> LocDataMap -> Maybe LocationData
-findLocationData loc locDataMap = locDataMap M.!? loc -- case filter ((== loc) . locationTemp) locationDatas of
-    --[] -> Nothing
-    --(location:rest) -> Just location
+findLocationData loc locDataMap = locDataMap M.!? loc 
    
 data LocationData = LocationData 
     {

@@ -3,8 +3,10 @@ module Consts.InitialData where
 import qualified Data.Map.Strict as M
 
 import Defs.Locations
+import Defs.GameState
 
 import Consts.TextConstants
+
 
 emptyLocationData = LocationData {
     npcs = [],
@@ -49,4 +51,8 @@ initialLocationsData = M.fromList [
     )
     ]
 
-
+initialGameState = GameState {
+    inventory = [], 
+    currentLocation = "dżungla", 
+    locationsData = initialLocationsData
+    }

@@ -2,9 +2,11 @@ module Funcs.IOFuncs where
 
 import Control.Monad.Trans.State.Strict;
 import Control.Monad.Trans.Class;
+import Data.List.Split
 
 import Defs.Locations
 import Defs.GameState
+import Defs.Interactions
 
 import Consts.TextConstants
 
@@ -16,11 +18,13 @@ printLocation l = do
     let toPrint = "Znajdujesz sie w:"
     printLines [toPrint, l]
  
-readCommand :: IO String
+readCommand :: IO [String]
 readCommand = do
     putStr "> "
     xs <- getLine
-    return xs
+    let splitxs = splitOn " " xs 
+    return splitxs
+
 
 printDescription :: GameStateIOT
 printDescription = do
@@ -36,4 +40,9 @@ printDescription = do
             lift $ printLines locDesc
             lift $ printLines locAddDesc
 
+printInteractionError :: Interaction -> IO()
+printInteractionError Talk = printLines ["W tym miejscu nie ma takiej postaci", ""]
+printInteractionError Attack = printLines ["W tym miejscu nie ma takiej postaci", ""]
+printInteractionError Pickup = printLines ["W tym miejscu nie ma takiego przedmiotu", ""]
+printInteractionError Drop = printLines ["Nie masz takiego przedmiotu w ekwipunku", ""]
 
