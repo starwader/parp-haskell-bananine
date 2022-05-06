@@ -25,6 +25,7 @@ initialLocationsData = M.fromList [
             desc = polankaDesc
         }
     ),("klasztor", emptyLocationData {
+            npcs = ["Uebe"],
             desc = klasztorDesc
         }
     ),("kamieniołom", emptyLocationData {
