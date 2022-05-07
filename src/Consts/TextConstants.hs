@@ -101,3 +101,200 @@ kamieniolomDesc = [
     "w głębi stoi ornamentna złota skrzynia.",
     "Na południu znajduje się wyjście."
     ]
+
+kokoWelcome = [
+    "Witaj podróżniku! ",
+    "Niestety żyjemy w ciężkich czasach.",
+    "Nasza rodzina stoi w obliczu zagłady!",
+    "Źli kłusownicy polują na nas i robią z naszych skór dywany! ",
+    "Jeśli tak dalej pójdzie, to wszyscy zginiemy!",
+    "Czy możesz nam pomóc?",
+    "Na pewno zostaniesz sowicie nagrodzony bananami, jeśli ci się uda",
+    "",
+    "<tak/nie>"
+    ]
+
+kokoUebeQuestion = [
+    "Czy porozmawiałeś już z Uebe?"
+    ]
+
+kokoEndingPhrase = [
+    "Oto nasz wybawca Bananine!"
+    ]
+
+kokoUebeQuestionNo = [
+    "A zatem wszyscy zginiemy!"
+    ]
+
+kokoUebeQuestionYes = [
+    "Och, dziękuję!",
+    "Powiadomię Uebe, mistrza starożytnych sztuk walki Tiu-Fiu",
+    "o twojej dobroduszności, a na pewno ci pomoże!",
+    "Poszukaj go na zachodzie."
+    ]
+
+gnomQuestion = [
+    "W starym forcie znowu wielka siła się zjawiła,",
+    "kłusowników kiść dywanów wiele z nas zrobiła.",
+    "Dnia takiego to mrocznego obudzi się w dżungli,",
+    "Przedstawiciel brudnej, strasznej i złej rasy ludzi.",
+    "Nie będzie to jednak postać zła, ani skalana,",
+    "Lecz reinkarnacja naszego starożytnego Banana.",
+    "Bananine - tak go zwać lud nasz prosty będzie,",
+    "Jego osiągnięcia znane będą światu wszędzie.",
+    "",
+    "Taka przepowiednia widnieje na starożytnych freskach w moim domu Ghfjg,",
+    "w górze Hasdkh.",
+    "Ale niestety,",
+    "przed każdym potencjalnym wybrańcem stoi test,",
+    "którego zawalenie wiąże się ze strasznymi konsekwencjami.",
+    "<gnom przystawia ci do czoła karabin AK-47>",
+    "Jakie zwierzę chodzi rano na 4 nogach,",
+    "na 2 w ciągu dnia i na 3 wieczorem?"
+    ]
+
+gnomGoodAnswer = [
+    "<Zaskoczony gnom odstawia AK-47 na bok>",
+    "Hmmmm....",
+    "Ciekawa odpowiedź...",
+    "Jeszcze nikt nie podał do tej pory sensownej odpowiedzi,",
+    "<wskazuje palcem na stos szkieletów>",
+    "ale twoja faktycznie zdaje się trzymać kupy.",
+    "Uznajmy, że przeszedłeś tę próbę, człowieku.",
+    "<Gnom uderza cię w głowę i tracisz przytomność>",
+    "<Po jakimś czasie budzisz się w klasztorze Tiu-Fiu>"
+    ]
+
+gnomBadAnswer = [
+    "Żaden z ciebie Bananine!",
+    "GIŃ!"
+    ]
+
+-- no zepsuty karabin opcja - dla uproszczenia
+
+uebeNoKokoTask = [
+    "Ludzie nie mają czego szukać w tym świętym miejscu.",
+    "Żegnam."
+    ]
+
+uebeGivingProbaTask = [
+    "Podobno chcesz nam pomóc... Hmmm...",
+    "Być może przepowiednia ziści się w twojej osobie?",
+    "W każdym razie, jeżeli twoja pomoc okaże się owocna,",
+    "nagrodzę cię dożywotnim zapasem bananów.",
+    "Jeśli chcesz nauczyć się sztuki Tiu-Fiu,",
+    "musisz poprawnie przejść test w Jaskini Próby.",
+    "<otwiera wrota jaskini próby>",
+    "Nie martw się, to z pewnością bezpieczne."
+    ]
+
+uebeProbaTask = [
+    "Wejdź do jaskini próby!",
+    "Przekonajmy się czy płynie w tobie krew Banana!"
+    ]
+
+uebeAfterProba = [
+    "Interesujące...",
+    "Jeśli pragniesz zostać moim uczniem i zgłębić tajniki Tiu-Fiu,",
+    "najpierw udowodnij swoją wartość.",
+    "Musisz odzyskać mój portfel ze starożytnej jaskini Kobry.",
+    "Aby do niej dotrzeć, musisz skierować się na wschód.",
+    "Wiele lat temu, złe pająki z rodu Kobry ukradły mi go.",
+    "Jednak zanim pójdziesz - musisz nauczyć się zaklęcia \"Potassium\";",
+    "tylko wtedy pokonasz pająki z rodu Kobry, które gnieżdżą się w jaskini.",
+    "<obsypuje cię potasem>",
+    "Teraz, spróbuj rzucić na mnie zaklęcie Potassium! (zaatakuj Uebe)"
+    ]
+
+uebeAttackUebe = [
+    "Zaatakuj mnie zaklęciem Potassium!"
+    ]
+
+uebeLearningTiuFiu = [
+    "Niesamowite!",
+    "Udało ci się!",
+    "Nareszcie mogę spłacić kredyt.",
+    "Teraz nauczę cię walczyć w stylu Tiu-Fiu.",
+    "<mija wiele miesięcy, a ty stajesz się coraz silniejszy...>",
+    "Umiesz teraz sztukę walki Tiu-Fiu!",
+    "Jednak wiedz,",
+    "że sama umiejętność Tiu-Fiu nie pozwoli ci pokonać wszystkich kłusowników.",
+    "Musisz jeszcze odnaleźć mój stary pistolet Luger Parabellum - Excaliber.",
+    "On pozwoli ci pokonać złych zbrodniarzy.",
+    "... Powodzenia, przyjacielu."
+    ]
+
+uebeLearnedTiuFiu = [
+    "Czy odnalazłeś już mój stary pistolet Luger Parabellum - Excaliber?",
+    "On pozwoli ci pokonać złych zbrodniarzy.",
+    "...Powodzenia przyjacielu."
+    ]
+
+uebeEnding = [
+    "Oto nasz wybawca Bananine!!",
+    "A oto twoja nagroda: dożywotni zapas bananów;",
+    "możesz do końca życia żyć w naszej rodzinie i cieszyć się naszymi bananami.",
+    "Pokój z tobą.",
+    "<ZWYCIĘSTWO>"
+    ]
+
+boboDefault = [
+    "U! U! A! A! AAAA!!",
+    "BANANA!"
+    ]
+
+andrzejDefault = [
+    "Nie rozmawiam z takimi jak ty!",
+    "Wynoś się stąd!"
+    ]
+
+pajakDefault = [
+    "ASSHSHSHHSHSHHHHH!!!"
+    ]
+
+-- attacks
+
+uebeAttackDefault = [
+    "Jak śmiesz!?",
+    "<Uebe zabija cię magicznym zaklęciem Edudu>"
+    ]
+
+uebeAttackTask = [
+    "Dobrze, jesteś gotowy.",
+    "Skieruj się teraz na wschód i odzyskaj mój portfel."
+    ]
+
+boboAttack = [
+    "\"AAAAAAA!!!!\" - Bobo umiera.",
+    "Zaskoczony Koko wyrywa ci ręce."
+    ]
+
+kokoAttack = [
+    "Koko patrzy na ciebie zazkoczony,",
+    "jednym szybkim ruchem wyrywa ci wszystkie kończyny."
+    ]
+
+pajakKill = [
+    "Rzucasz na pająka zaklęcie mistrza Uebe - Potassium.",
+    "Pająk momentalnie kurczy się do rozmiaru naparstka, a ty go rozdeptujesz.",
+    "Zauważasz, że z pająka wypadł portfel mistrza Uebe."
+    ]
+
+pajakAttackDefault = [
+    "SSSDHHSHHSHSHSHHS",
+    "<pająk z łatwością cię rozgniata na ścianie swoją wielką nogą>"
+    ]
+
+andrzejKill = [
+    "Zastrzeliłeś łotrzyka Andrzeja.",
+    "Możesz teraz wejść do fortu."
+    ]
+
+andrzejAttackDefault = [
+    "Andrzej jednym pchnięciem kłusowniczego sztyletu ",
+    "morduje cię i przerabia na dywan."
+    ]
+
+unkillableDefault = [
+    "HAHA, nie możesz mnie zabić."
+    ]

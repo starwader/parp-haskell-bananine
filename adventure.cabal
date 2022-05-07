@@ -33,8 +33,11 @@ library
       Defs.Inventory
       Defs.Locations
       Defs.Npcs
+      Defs.Tasks
       Funcs.IOFuncs
       Funcs.MoveFuncs
+      Funcs.Talk
+      Funcs.TaskFuncs
   other-modules:
       Paths_adventure
   hs-source-dirs:

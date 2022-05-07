@@ -1,15 +1,17 @@
 module Funcs.MoveFuncs where
 
 import Control.Monad.Trans.State.Strict
-import Control.Monad.Trans.Class;
+import Control.Monad.Trans.Class
 import qualified Data.Map.Strict as M
 
 import Defs.GameState
 import Defs.Locations
 import Defs.Npcs
 import Defs.Inventory
+import Defs.Tasks
 import Defs.Interactions
 
+import Funcs.Talk
 import Funcs.IOFuncs
 
 -- gos - go with GameStateIOT monad - proper implementation of go 
@@ -47,13 +49,6 @@ interacts interaction safeInteracted = do
             Pickup -> pickups interacted locationData 
             _ -> lift $ printLines ["Nieprawidłowa interakcja", ""]
 
-talks :: Npc -> LocationData -> GameStateIOT
-talks npc locationData = do 
-  if elem npc $ npcs locationData then 
-    lift $ printLines ["talking"]
-                        -- talk to npc
-  else
-    lift $ printInteractionError Talk
 
 drops :: Item -> LocationData -> GameStateIOT
 drops item locationData = do
@@ -82,7 +77,9 @@ pickups item locationData = do
   else
     lift $ printInteractionError Pickup
 
-
-
-
-  
+talks :: Npc -> LocationData -> GameStateIOT
+talks npc locationData = do
+  if elem npc $ npcs locationData then
+    talk npc
+  else
+    lift $ printInteractionError Talk

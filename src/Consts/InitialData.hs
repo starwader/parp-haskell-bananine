@@ -4,6 +4,7 @@ import qualified Data.Map.Strict as M
 
 import Defs.Locations
 import Defs.GameState
+import Defs.Tasks
 
 import Consts.TextConstants
 
@@ -53,7 +54,10 @@ initialLocationsData = M.fromList [
     ]
 
 initialGameState = GameState {
+    tasks = [],
+    finishedTasks = [],
     inventory = [], 
     currentLocation = "dżungla", 
     locationsData = initialLocationsData
     }
+
