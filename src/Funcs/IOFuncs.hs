@@ -36,9 +36,12 @@ printDescription = do
     case maybeLocationData of
         Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
         Just locationData -> do
-            let (locDesc, locAddDesc) = (desc locationData, additionalDesc locationData)
-            lift $ printLines locDesc
-            lift $ printLines locAddDesc
+            let (locDesc, locAddDesc, its) = (desc locationData, additionalDesc locationData, items locationData)
+            lift $ printLines $ desc locationData
+            lift $ printLines $ additionalDesc locationData
+            lift $ printLines [""]
+            lift $ printLines $ "Możesz podnieść:":(map ("- "++) $ items locationData)
+            lift $ printLines $ "Dostępne postacie:":(map ("- "++) $ npcs locationData)
 
 printInteractionError :: Interaction -> IO()
 printInteractionError Talk = printLines ["W tym miejscu nie ma takiej postaci", ""]

@@ -12,6 +12,7 @@ import Defs.Tasks
 import Defs.Interactions
 
 import Funcs.Talk
+import Funcs.Attack
 import Funcs.IOFuncs
 
 -- gos - go with GameStateIOT monad - proper implementation of go 
@@ -29,10 +30,6 @@ gos d = do
              printDescription
     
  
-teleports :: GameState -> Location -> GameState
-teleports gameState loc = gameState { currentLocation = loc }
-
-
 interacts :: Interaction -> Maybe String -> GameStateIOT
 interacts interaction safeInteracted = do 
   case safeInteracted of
@@ -46,8 +43,8 @@ interacts interaction safeInteracted = do
           case interaction of 
             Talk -> talks interacted locationData 
             Drop -> drops interacted locationData 
+            Attack -> attacks interacted locationData 
             Pickup -> pickups interacted locationData 
-            _ -> lift $ printLines ["Nieprawidłowa interakcja", ""]
 
 
 drops :: Item -> LocationData -> GameStateIOT
@@ -58,7 +55,7 @@ drops item locationData = do
     let newLocationData = locationData {items = item:(items locationData)} 
     modify (\x -> gameState {
         inventory = filter (/=item) inv,
-        locationsData = M.insert item newLocationData $ locationsData gameState
+        locationsData = M.insert (currentLocation gameState) newLocationData $ locationsData gameState
         })
     lift $ printLines ["Upuściłeś ", item]
   else
@@ -71,7 +68,7 @@ pickups item locationData = do
     let newLocationData = locationData {items = filter (/=item) $ items locationData} 
     modify (\x -> gameState {
         inventory = item:(inventory gameState),
-        locationsData = M.insert item newLocationData $ locationsData gameState
+        locationsData = M.insert (currentLocation gameState) newLocationData $ locationsData gameState
         })
     lift $ printLines ["Podniosłeś ", item]
   else
@@ -83,3 +80,10 @@ talks npc locationData = do
     talk npc
   else
     lift $ printInteractionError Talk
+
+attacks :: Npc -> LocationData -> GameStateIOT
+attacks npc locationData = do
+  if elem npc $ npcs locationData then
+    attack npc
+  else
+    lift $ printInteractionError Attack

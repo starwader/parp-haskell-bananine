@@ -49,14 +49,24 @@ gameLoop = do
         "rozmawiaj" -> do interacts Talk $ headMay cmds
                           gameLoop
          
+        "atakuj" -> do interacts Attack $ headMay cmds
+                       gameLoop
+
         "upuść" -> do interacts Drop $ headMay cmds 
                       gameLoop
 
         "podnieś" -> do interacts Pickup $ headMay cmds 
                         gameLoop
 
-        "gdzie jestem" -> do printDescription
-                             gameLoop
+        "gdzie" -> do printDescription
+                      gameLoop
+        
+        "zadania" -> do lift $ printLines $ "Aktywne zadania:":(map ("- "++) $ tasks s)
+                        lift $ printLines $ "Zakończone zadania:":(map ("- "++) $ finishedTasks s)
+                        gameLoop
+                        
+        "ekwipunek" -> do lift $ printLines $ "Ekwipunek:":(map ("- "++) $ inventory s)
+                          gameLoop
 
         "koniec" -> return ()
         _ -> do lift $ printLines ["Nieznana komenda", ""]

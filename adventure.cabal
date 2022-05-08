@@ -34,10 +34,14 @@ library
       Defs.Locations
       Defs.Npcs
       Defs.Tasks
+      Funcs.Attack
+      Funcs.EndingFuncs
       Funcs.IOFuncs
+      Funcs.ItemFuncs
       Funcs.MoveFuncs
       Funcs.Talk
       Funcs.TaskFuncs
+      Funcs.Teleport
   other-modules:
       Paths_adventure
   hs-source-dirs:

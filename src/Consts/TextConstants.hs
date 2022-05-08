@@ -33,6 +33,7 @@ instructionsText = [
     "ekwipunek              -- wyświetl ekwipunek",
     "podnieś <Przedmiot>    -- podnieś przedmiot",
     "upuść <Przedmiot>      -- upuść przedmiot",
+    "zadania                -- wyświetl zadania",
     ""
     ]
 
@@ -133,6 +134,10 @@ kokoUebeQuestionYes = [
     "Poszukaj go na zachodzie."
     ]
 
+gnomDefault = [
+    "SpAdAj StąD!!!1!!"
+    ]
+
 gnomQuestion = [
     "W starym forcie znowu wielka siła się zjawiła,",
     "kłusowników kiść dywanów wiele z nas zrobiła.",
@@ -206,6 +211,10 @@ uebeAfterProba = [
     "Teraz, spróbuj rzucić na mnie zaklęcie Potassium! (zaatakuj Uebe)"
     ]
 
+uebeWalletTask = [
+    "Nie przychodź do mnie bez mojego portfela!"
+    ]
+
 uebeAttackUebe = [
     "Zaatakuj mnie zaklęciem Potassium!"
     ]
@@ -219,7 +228,7 @@ uebeLearningTiuFiu = [
     "Umiesz teraz sztukę walki Tiu-Fiu!",
     "Jednak wiedz,",
     "że sama umiejętność Tiu-Fiu nie pozwoli ci pokonać wszystkich kłusowników.",
-    "Musisz jeszcze odnaleźć mój stary pistolet Luger Parabellum - Excaliber.",
+    "Musisz jeszcze odnaleźć starożytny pistolet Luger Parabellum - Excaliber.",
     "On pozwoli ci pokonać złych zbrodniarzy.",
     "... Powodzenia, przyjacielu."
     ]
