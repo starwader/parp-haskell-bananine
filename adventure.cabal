@@ -38,6 +38,7 @@ library
       Funcs.EndingFuncs
       Funcs.IOFuncs
       Funcs.ItemFuncs
+      Funcs.Kill
       Funcs.MoveFuncs
       Funcs.Talk
       Funcs.TaskFuncs

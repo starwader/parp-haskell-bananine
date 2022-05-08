@@ -13,6 +13,7 @@ import Funcs.IOFuncs
 import Funcs.TaskFuncs
 import Funcs.EndingFuncs
 import Funcs.ItemFuncs
+import Funcs.Kill
 
 import Consts.TextConstants
 
@@ -34,8 +35,8 @@ attack "Pająk" = do
     case findLocationData loc $ locationsData gameState of
       Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
       Just locationData -> do
-        let newLocationData = locationData
-        newItem "Portfel"
+        kill "Pająk" loc
+        newItem "portfel"
   else do
     lift $ printLines pajakAttackDefault
     die
