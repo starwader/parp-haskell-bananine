@@ -7,7 +7,10 @@ import Defs.GameState
 import Defs.Locations
 
 import Funcs.IOFuncs
+import Funcs.ItemFuncs
+import Funcs.TaskFuncs
 
+import Consts.TextConstants
  
 gos :: Direction -> GameStateIOT
 gos d = do
@@ -16,8 +19,19 @@ gos d = do
     let nextLocMaybe = go oldLoc d
 
     case nextLocMaybe of 
-         Nothing -> lift $ printLines ["Nie możesz tędy iść", ""] 
-         Just nextLoc -> do
-             modify (\x -> gameState {currentLocation = nextLoc})
-             printDescription
+        Nothing -> lift $ printLines ["Nie możesz tędy iść", ""] 
+        Just "fort" -> do
+            if not $ finishedTask "zabij kłusowników" gameState then do
+                if itemInInventory "klucz_do_fortu" gameState then do
+                    modify (\x -> gameState {currentLocation = "fort"})
+                    lift $ printLines killBadGuysText
+                    finishTask "zabij kłusowników"  
+                else 
+                    lift $ printLines ["Potrzebujesz klucza, aby tu wejść"]
+            else do 
+                modify (\x -> gameState {currentLocation = "fort"})
+                printDescription
+        Just nextLoc -> do
+            modify (\x -> gameState {currentLocation = nextLoc})
+            printDescription
     

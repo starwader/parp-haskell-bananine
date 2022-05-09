@@ -42,6 +42,18 @@ instructionsText = [
     ""
     ]
 
+killBadGuysText = [
+    "z każdej strony widzisz uzbrojonych po zęby kłusowników.",
+    "Na szczęście jesteś już pełnoprawnym wybrańcem i mistrzem sztuk walki Tiu-Fiu.",
+    "Teraz dopełnia się twoje przeznaczenie.",
+    "Kłusownicy otwierają ogień,",
+    "ty jednak skutecznie unikasz wszystkich ich strzałów,",
+    "w międzyczasie strzelając ze swojego pięknego Excalibra.",
+    "W mgnieniu oka wszystkich dziesięciu kłusowników pada na ziemię",
+    "a ty nabierasz jeszcze większej ochoty na banany z dżungli.",
+    "Na zachodzie znajduje się wyjście."
+    ]
+
 dzunglaDesc = [
     "Znajdujesz się w gęstej, ciemnej dżungli.",
     "Na północy znajduje się mała polanka która jest domem rodziny goryli."
@@ -302,7 +314,7 @@ pajakAttackDefault = [
 
 andrzejKill = [
     "Zastrzeliłeś łotrzyka Andrzeja.",
-    "Możesz teraz wejść do fortu."
+    "Z jego spodni wypadł klucz do fortu."
     ]
 
 andrzejAttackDefault = [

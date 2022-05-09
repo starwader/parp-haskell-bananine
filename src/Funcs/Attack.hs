@@ -34,6 +34,7 @@ attack "Andrzej" = do
       Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
       Just locationData -> do
         kill "Andrzej" loc
+        newItem "klucz_do_fortu"
   else do
     lift $ printLines andrzejAttackDefault
     die
