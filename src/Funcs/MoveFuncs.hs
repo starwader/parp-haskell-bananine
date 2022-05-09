@@ -5,6 +5,7 @@ import Control.Monad.Trans.Class
 
 import Defs.GameState
 import Defs.Locations
+import Defs.Tasks
 
 import Funcs.IOFuncs
 import Funcs.ItemFuncs
@@ -21,11 +22,11 @@ gos d = do
     case nextLocMaybe of 
         Nothing -> lift $ printLines ["Nie możesz tędy iść", ""] 
         Just "fort" -> do
-            if not $ finishedTask "zabij kłusowników" gameState then do
+            if not $ finishedTask taskKillBadGuys gameState then do
                 if itemInInventory "klucz_do_fortu" gameState then do
                     modify (\x -> gameState {currentLocation = "fort"})
                     lift $ printLines killBadGuysText
-                    finishTask "zabij kłusowników"  
+                    finishTask taskKillBadGuys  
                 else 
                     lift $ printLines ["Potrzebujesz klucza, aby tu wejść"]
             else do 

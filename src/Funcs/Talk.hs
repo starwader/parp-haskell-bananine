@@ -86,6 +86,9 @@ talk "Uebe" = do
         lift $ printLines uebeWalletTask
     else if activeTask taskKillBadGuys gameState then 
       lift $ printLines uebeLearnedTiuFiu
+    else if finishedTask taskKillBadGuys gameState then do
+      lift $ printLines uebeEnding
+      lift exit
     else 
       lift $ printLines ["błąd 2"]
   else 

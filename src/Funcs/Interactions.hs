@@ -35,7 +35,7 @@ interacts interaction cmdsarg = do
             Drop -> drops interacted locationData 
             Attack -> attacks interacted locationData 
             Pickup -> pickups interacted locationData 
-            Open -> opens interacted locationData
+            Open -> containerInteracts interaction interacted (tail cmdsarg) locationData
             Putin -> containerInteracts interaction interacted (tail cmdsarg) locationData
             Takeout -> containerInteracts interaction interacted (tail cmdsarg) locationData
             
