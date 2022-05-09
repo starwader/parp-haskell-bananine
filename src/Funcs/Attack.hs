@@ -14,6 +14,7 @@ import Funcs.TaskFuncs
 import Funcs.EndingFuncs
 import Funcs.ItemFuncs
 import Funcs.Kill
+import Funcs.SkillFuncs
 
 import Consts.TextConstants
 
@@ -25,11 +26,21 @@ attack "Bobo" = do
   lift $ printLines boboAttack
   die
 attack "Andrzej" = do
-  lift $ printLines andrzejAttackDefault
-  die
+  gameState <- get
+  if elem "Excaliber" $ inventory gameState then do
+    lift $ printLines andrzejKill 
+    let loc = currentLocation gameState
+    case findLocationData loc $ locationsData gameState of
+      Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
+      Just locationData -> do
+        kill "Andrzej" loc
+  else do
+    lift $ printLines andrzejAttackDefault
+    die
 attack "Pająk" = do
   gameState <- get
-  if activeTask taskFindWallet gameState then do
+  --if activeTask taskFindWallet gameState then do
+  if elem "zaklęcie Potassium" $ skills gameState then do
     lift $ printLines pajakKill
     let loc = currentLocation gameState
     case findLocationData loc $ locationsData gameState of

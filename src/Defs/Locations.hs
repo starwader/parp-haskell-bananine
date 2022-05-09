@@ -4,6 +4,7 @@ import qualified Data.Map.Strict as M
 
 import Defs.Npcs
 import Defs.Inventory
+import Defs.Containers
 
 -- locations
    
@@ -38,6 +39,7 @@ data LocationData = LocationData
     {
         npcs :: [Npc],
         items :: [Item],
+        containers :: M.Map Container ContainerData,
         desc :: [String],
         additionalDesc :: [String]
     }

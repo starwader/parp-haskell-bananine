@@ -22,3 +22,22 @@ newItem item = do
         locationsData = M.insert loc newLocationData $ locationsData gameState
       })
       lift $ printLines ["Możesz podnieść nowy przedmiot: ", item]
+      
+addItemToInventory :: Item -> GameStateIOT
+addItemToInventory item = do
+  gameState <- get
+  lift $ printLines ["","    Przedmiot " ++ item ++ " został dodany do ekwipunku"]
+  modify (\x -> gameState {
+            inventory = item:inventory gameState
+          })
+
+delItemFromInventory :: Item -> GameStateIOT
+delItemFromInventory item = do
+  gameState <- get
+  lift $ printLines ["","    Przedmiot " ++ item ++ " został usunięty z ekwipunku"]
+  modify (\x -> gameState {
+            inventory = filter (/=item) $ inventory gameState
+          })
+
+itemInInventory :: Item -> GameState -> Bool
+itemInInventory item gameState = elem item $ inventory gameState

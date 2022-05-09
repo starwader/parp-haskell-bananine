@@ -4,7 +4,6 @@ import qualified Data.Map.Strict as M
 import Control.Monad.Trans.Class;
 import Control.Monad.Trans.State.Strict;
 import Control.Monad;
-import Safe
 
 import Defs.Locations
 import Defs.Inventory
@@ -17,6 +16,7 @@ import Consts.InitialData
 
 import Funcs.IOFuncs
 import Funcs.MoveFuncs
+import Funcs.Interactions
 
 -- "The Quest of Bananine"
 -- 
@@ -46,29 +46,42 @@ gameLoop = do
         "e" -> do gos East
                   gameLoop
 
-        "rozmawiaj" -> do interacts Talk $ headMay cmds
+        "rozmawiaj" -> do interacts Talk cmds
                           gameLoop
          
-        "atakuj" -> do interacts Attack $ headMay cmds
+        "atakuj" -> do interacts Attack cmds
                        gameLoop
 
-        "upuść" -> do interacts Drop $ headMay cmds 
+        "upuść" -> do interacts Drop cmds 
                       gameLoop
 
-        "podnieś" -> do interacts Pickup $ headMay cmds 
+        "podnieś" -> do interacts Pickup cmds 
                         gameLoop
+        
+        "otwórz" -> do interacts Open cmds
+                       gameLoop
+
+        "wyjmij" -> do interacts Takeout cmds
+                       gameLoop
+
+        "umieść" -> do interacts Putin cmds
+                       gameLoop
 
         "gdzie" -> do printDescription
                       gameLoop
-        
-        "zadania" -> do lift $ printLines $ "Aktywne zadania:":(map ("- "++) $ tasks s)
-                        lift $ printLines $ "Zakończone zadania:":(map ("- "++) $ finishedTasks s)
+
+        "zadania" -> do printListWithDescFail "Aktywne zadania:" "Brak aktywnych zadań" $ tasks s
+                        printListWithDescFail "Zakończone zadania:" "Nie zakończyłeś jeszcze żadnego zadania" $ finishedTasks s
                         gameLoop
                         
-        "ekwipunek" -> do lift $ printLines $ "Ekwipunek:":(map ("- "++) $ inventory s)
+        "ekwipunek" -> do printListWithDescFail "Ekwipunek:" "Twój ekwipunek jest pusty" $ inventory s 
                           gameLoop
 
+        "umiejętności" -> do printListWithDescFail "Umiejętności:" "Nie masz żadnych umiejętności :(" $ skills s
+                             gameLoop
+
         "koniec" -> return ()
+
         _ -> do lift $ printLines ["Nieznana komenda", ""]
                 gameLoop 
 

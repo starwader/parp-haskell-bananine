@@ -24,16 +24,21 @@ introductionText = [
 instructionsText = [
     "Dostępne komendy:",
     "",
-    "n,s,w,e                -- idź w daną stronę",
-    "gdzie jestem           -- wyświetl informacje o miejscu",
-    "pomoc                  -- wyświetl to menu",
-    "koniec                 -- zakończ grę",
-    "rozmawiaj <Postać>     -- rozmawiaj z postacią",
-    "atakuj <Postać>        -- zaatakuj postać",
-    "ekwipunek              -- wyświetl ekwipunek",
-    "podnieś <Przedmiot>    -- podnieś przedmiot",
-    "upuść <Przedmiot>      -- upuść przedmiot",
-    "zadania                -- wyświetl zadania",
+    "n,s,w,e                            -- idź w daną stronę",
+    "gdzie jestem                       -- wyświetl informacje o miejscu",
+    "pomoc                              -- wyświetl to menu",
+    "koniec                             -- zakończ grę",
+    "rozmawiaj <Postać>                 -- rozmawiaj z postacią",
+    "atakuj <Postać>                    -- zaatakuj postać",
+    "ekwipunek                          -- wyświetl ekwipunek",
+    "postacie                           -- wyświetl postacie", 
+    "otwórz <Kontener>                  -- otwórz kontener",
+    "umiejętności                       -- wyświetl umiejętności",
+    "podnieś <Przedmiot>                -- podnieś przedmiot",
+    "upuść <Przedmiot>                  -- upuść przedmiot",
+    "wyjmij <Przedmiot> z <Kontener>    -- wyjmij przemiot z kontenera",
+    "umieść <Przedmiot> w <Kontener>    -- włóż przedmiot do kontenera",
+    "zadania                            -- wyświetl zadania",
     ""
     ]
 
@@ -230,6 +235,7 @@ uebeLearningTiuFiu = [
     "że sama umiejętność Tiu-Fiu nie pozwoli ci pokonać wszystkich kłusowników.",
     "Musisz jeszcze odnaleźć starożytny pistolet Luger Parabellum - Excaliber.",
     "On pozwoli ci pokonać złych zbrodniarzy.",
+    "Oto starożytny klucz kiedyś znalazłem w zestawie Happy Meal - być może ci pomoże.",
     "... Powodzenia, przyjacielu."
     ]
 
@@ -254,7 +260,7 @@ boboDefault = [
 
 andrzejDefault = [
     "Nie rozmawiam z takimi jak ty!",
-    "Wynoś się stąd!"
+    "Wynoś się stąd, albo przerobię cię na dywan!"
     ]
 
 pajakDefault = [

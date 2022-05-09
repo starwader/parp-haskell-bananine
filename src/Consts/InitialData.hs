@@ -5,20 +5,34 @@ import qualified Data.Map.Strict as M
 import Defs.Locations
 import Defs.GameState
 import Defs.Tasks
+import Defs.Containers
 
 import Consts.TextConstants
 
 
 emptyLocationData = LocationData {
+    containers = M.fromList [],
     npcs = [],
     items = [],
     desc = [],
     additionalDesc = []
 }
 
+emptyContainer = ContainerData {
+    store = [],
+    itemRequired = Nothing
+}
+
 initialLocationsData = M.fromList [
     ("dżungla", emptyLocationData {
             items = ["banan"],
+            containers = M.fromList [
+              ("beczka", emptyContainer {
+                store = ["zgniły_banan"]
+                } 
+              )
+              ],
+            
             desc = dzunglaDesc
         }
     ),("polanka", emptyLocationData {
@@ -30,7 +44,14 @@ initialLocationsData = M.fromList [
             desc = klasztorDesc
         }
     ),("kamieniołom", emptyLocationData {
-            desc = kamieniolomDesc
+            desc = kamieniolomDesc, 
+            containers = M.fromList [
+                ("skrzynia", emptyContainer {
+                  store = ["Excaliber"],
+                  itemRequired = Just "klucz"
+                  }
+                )
+              ]
         }
     ),("jpróby", emptyLocationData {
             npcs = ["Gnom"],
@@ -58,6 +79,7 @@ initialGameState = GameState {
     finishedTasks = [],
     inventory = [], 
     currentLocation = "dżungla", 
+    skills = [],
     locationsData = initialLocationsData
     }
 

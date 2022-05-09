@@ -9,9 +9,11 @@ import Defs.Npcs
 import Defs.Tasks
 
 import Funcs.IOFuncs
+import Funcs.SkillFuncs
 import Funcs.TaskFuncs
 import Funcs.EndingFuncs
 import Funcs.Teleport
+import Funcs.ItemFuncs
 
 import Consts.TextConstants
 
@@ -69,14 +71,17 @@ talk "Uebe" = do
     if noTaskYet taskAttackUebe gameState then do
       lift $ printLines uebeAfterProba 
       addTask taskAttackUebe
+      addSkill "zaklęcie Potassium"
     else if activeTask taskAttackUebe gameState then 
       lift $ printLines uebeAttackUebe 
     else if activeTask taskFindWallet gameState then do
       if elem "portfel" $ inventory gameState then do
         lift $ printLines uebeLearningTiuFiu
+        delItemFromInventory "portfel"
+        addItemToInventory "klucz"
+        addSkill "Tiu Fiu"
         finishTask taskFindWallet
         addTask taskKillBadGuys
-        addTask taskFindExcaliber
       else
         lift $ printLines uebeWalletTask
     else if activeTask taskKillBadGuys gameState then 

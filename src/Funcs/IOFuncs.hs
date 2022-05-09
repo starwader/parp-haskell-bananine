@@ -1,5 +1,6 @@
 module Funcs.IOFuncs where
 
+import qualified Data.Map.Strict as M
 import Control.Monad.Trans.State.Strict;
 import Control.Monad.Trans.Class;
 import Data.List.Split
@@ -25,6 +26,19 @@ readCommand = do
     let splitxs = splitOn " " xs 
     return splitxs
 
+printListWithDesc :: String -> [String] -> GameStateIOT
+printListWithDesc desc toPrintList = do
+  if length toPrintList /= 0 then  
+    lift $ printLines $ desc:(map ("- "++) toPrintList)
+  else
+    lift $ putStr ""  --todo
+
+printListWithDescFail :: String -> String -> [String] -> GameStateIOT
+printListWithDescFail desc failMsg toPrintList = do
+  if length toPrintList /= 0 then  
+    lift $ printLines $ desc:(map ("- "++) toPrintList)
+  else
+    lift $ printLines [failMsg]
 
 printDescription :: GameStateIOT
 printDescription = do
@@ -40,12 +54,15 @@ printDescription = do
             lift $ printLines $ desc locationData
             lift $ printLines $ additionalDesc locationData
             lift $ printLines [""]
-            lift $ printLines $ "Możesz podnieść:":(map ("- "++) $ items locationData)
-            lift $ printLines $ "Dostępne postacie:":(map ("- "++) $ npcs locationData)
+            printListWithDesc "Możesz podnieść:" $ items locationData
+            printListWithDesc "Dostępne postacie:" $ npcs locationData
+            printListWithDesc "Kontenery:" $ M.keys $ containers locationData
 
 printInteractionError :: Interaction -> IO()
 printInteractionError Talk = printLines ["W tym miejscu nie ma takiej postaci", ""]
 printInteractionError Attack = printLines ["W tym miejscu nie ma takiej postaci", ""]
 printInteractionError Pickup = printLines ["W tym miejscu nie ma takiego przedmiotu", ""]
 printInteractionError Drop = printLines ["Nie masz takiego przedmiotu w ekwipunku", ""]
+printInteractionError Open = printLines ["Taki kontener nie istnieje", ""]
+printInteractionError _ = printLines ["Błąd interakcji"]
 

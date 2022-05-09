@@ -28,18 +28,22 @@ library
       Adventure
       Consts.InitialData
       Consts.TextConstants
+      Defs.Containers
       Defs.GameState
       Defs.Interactions
       Defs.Inventory
       Defs.Locations
       Defs.Npcs
+      Defs.Skills
       Defs.Tasks
       Funcs.Attack
       Funcs.EndingFuncs
+      Funcs.Interactions
       Funcs.IOFuncs
       Funcs.ItemFuncs
       Funcs.Kill
       Funcs.MoveFuncs
+      Funcs.SkillFuncs
       Funcs.Talk
       Funcs.TaskFuncs
       Funcs.Teleport
