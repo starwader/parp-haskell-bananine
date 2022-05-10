@@ -4,6 +4,7 @@ import qualified Data.Map.Strict as M
 import Control.Monad.Trans.State.Strict;
 import Control.Monad.Trans.Class;
 import Data.List.Split
+import System.IO
 
 import Defs.Locations
 import Defs.GameState
@@ -22,6 +23,7 @@ printLocation l = do
 readCommand :: IO [String]
 readCommand = do
     putStr "> "
+    hFlush stdout
     xs <- getLine
     let splitxs = splitOn " " xs 
     return splitxs
