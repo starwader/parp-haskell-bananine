@@ -11,6 +11,11 @@ import Defs.GameState
 
 exit = exitWith(ExitSuccess)
 
+win :: GameStateIOT
+win = do
+  lift $ printLines ["", "Zwycięstwo!!!"]
+  lift exit
+
 die :: GameStateIOT
 die = do
   lift $ printLines ["","Umarłeś"] 
