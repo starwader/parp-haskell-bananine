@@ -89,10 +89,7 @@ containerInteracts interaction interacted cmds locationData = do
    case maybeContname of
     Nothing -> lift $ printLines ["Nieznana komenda - nieprawidłowe argumenty"]
     Just contname -> do
-      case headMay $ reverse cmds of
-        Nothing -> lift $ printLines ["Nieznana komenda"]
-        Just contName -> do 
-          case (containers locationData) M.!? contName of 
+          case (containers locationData) M.!? contname of 
             Nothing -> lift $ printInteractionError Open
             Just cont -> do 
               let canBeOpened = case itemRequired cont of
@@ -106,10 +103,6 @@ containerInteracts interaction interacted cmds locationData = do
                   _ -> lift $ printLines ["Nieprawidłowa interakcja"]
               else 
                 lift $ printLines ["Nie masz niczego co może otworzyć ten kontener"]
-
-
-
-
 
 opens :: String -> LocationData -> GameStateIOT
 opens containerName locationData = do
