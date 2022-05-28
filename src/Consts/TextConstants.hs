@@ -1,7 +1,7 @@
 module Consts.TextConstants where
 
-introductionText = [
-    "Jest rok 1950.",
+introductionText =
+  [ "Jest rok 1950.",
     "Jesteś znanym poszukiwaczem przygód Robertem Gałązką.",
     "Niestety, podczas tej wyprawy w głąb afryki,",
     "twoja drużyna została schwytana przez tubylców.",
@@ -19,10 +19,10 @@ introductionText = [
     "",
     "...po jakimś czasie budzisz się...",
     ""
-    ]
+  ]
 
-instructionsText = [
-    "Dostępne komendy:",
+instructionsText =
+  [ "Dostępne komendy:",
     "",
     "n,s,w,e                            -- idź w daną stronę",
     "gdzie jestem                       -- wyświetl informacje o miejscu",
@@ -31,7 +31,7 @@ instructionsText = [
     "rozmawiaj <Postać>                 -- rozmawiaj z postacią",
     "atakuj <Postać>                    -- zaatakuj postać",
     "ekwipunek                          -- wyświetl ekwipunek",
-    "postacie                           -- wyświetl postacie", 
+    "postacie                           -- wyświetl postacie",
     "otwórz <Kontener>                  -- otwórz kontener",
     "umiejętności                       -- wyświetl umiejętności",
     "podnieś <Przedmiot>                -- podnieś przedmiot",
@@ -40,10 +40,10 @@ instructionsText = [
     "umieść <Przedmiot> w <Kontener>    -- włóż przedmiot do kontenera",
     "zadania                            -- wyświetl zadania",
     ""
-    ]
+  ]
 
-killBadGuysText = [
-    "z każdej strony widzisz uzbrojonych po zęby kłusowników.",
+killBadGuysText =
+  [ "z każdej strony widzisz uzbrojonych po zęby kłusowników.",
     "Na szczęście jesteś już pełnoprawnym wybrańcem i mistrzem sztuk walki Tiu-Fiu.",
     "Teraz dopełnia się twoje przeznaczenie.",
     "Kłusownicy otwierają ogień,",
@@ -52,40 +52,40 @@ killBadGuysText = [
     "W mgnieniu oka wszystkich dziesięciu kłusowników pada na ziemię",
     "a ty nabierasz jeszcze większej ochoty na banany z dżungli.",
     "Na zachodzie znajduje się wyjście."
-    ]
+  ]
 
-dzunglaDesc = [
-    "Znajdujesz się w gęstej, ciemnej dżungli.",
+dzunglaDesc =
+  [ "Znajdujesz się w gęstej, ciemnej dżungli.",
     "Na północy znajduje się mała polanka która jest domem rodziny goryli."
-    ]
+  ]
 
-rozwidlenieDesc = [
-    "Zbliżasz się do rozwidlenia świeżki.",
+rozwidlenieDesc =
+  [ "Zbliżasz się do rozwidlenia świeżki.",
     "Na wschodzie wznosi się spory fort kłusowników,",
     "zaś na zachodzie znajduje się polanka Goryli.",
     "Na północy widzisz mroczny kamieniołom.",
     "Na południu dostrzegasz wejście do przerażającej jaskini Kobry"
-     ]
+  ]
 
-polankaDesc = [
-    "Zbliżasz się do sporej polanki,",
+polankaDesc =
+  [ "Zbliżasz się do sporej polanki,",
     "na której znajdują się dwa goryle z rodu Pumba.",
     "Potężny goryl Koko patrzy się na ciebie spokojnym wzrokiem.",
     "Mały Bobo skacze radośnie.",
     "Na południu znajduje się mroczna dżungla.",
     "Na wschodzie widzisz długą ścieżkę,",
     "a na zachodzie zjawiskowy klasztor Tiu-Fiu."
-     ]
+  ]
 
-klasztorDesc = [
-    "Znajdujesz się w starożytnym budynku - sercu szkoły Tiu-Fiu.",
+klasztorDesc =
+  [ "Znajdujesz się w starożytnym budynku - sercu szkoły Tiu-Fiu.",
     "Po środku stoi mistrz starożytnych sztuk walki Tiu-Fiu - Uebe.",
     "Na wschodzie znajduje się Polanka goryli,",
     "a na północy \"jaskinia próby\"."
-     ]
+  ]
 
-jprobyDesc = [
-    "Po wejściu do jaskini,",
+jprobyDesc =
+  [ "Po wejściu do jaskini,",
     "wrota zamykają się za tobą.",
     "Po wielogodzinnej i ciężkiej tułaczce przez",
     "długą i głęboką jaskinię próby,",
@@ -96,32 +96,32 @@ jprobyDesc = [
     "pajęczynami,",
     "szkieletami i starymi książkami.",
     "Na fotelu zauważasz starego gnoma."
-     ]
+  ]
 
-jkobryDesc = [
-    "Wchodzisz do ciemnej i przerażającej jaskini Kobry.",
+jkobryDesc =
+  [ "Wchodzisz do ciemnej i przerażającej jaskini Kobry.",
     "Wyjście znajduje się na północy." -- inaczej zrobione niż w prologu
-    ]
+  ]
 
-dziedziniecDesc = [
-    "Znajdujesz się przed wejściem fortu,",
+dziedziniecDesc =
+  [ "Znajdujesz się przed wejściem fortu,",
     "które jest po twojej wschodniej stronie.",
     "Na zachodzie znajduje się ścieżka, z której przyszedłeś."
-    ]
+  ]
 
-fortDesc = [
-    "Znajdujesz się na dziedzińcu fortu.",
-    "Na zachodzie znajduje się wyjście."  -- inaczej niż w prologi
-    ]
+fortDesc =
+  [ "Znajdujesz się na dziedzińcu fortu.",
+    "Na zachodzie znajduje się wyjście." -- inaczej niż w prologi
+  ]
 
-kamieniolomDesc = [
-    "Stoisz po środku starego kamieniołomu,",
+kamieniolomDesc =
+  [ "Stoisz po środku starego kamieniołomu,",
     "w głębi stoi ornamentna złota skrzynia.",
     "Na południu znajduje się wyjście."
-    ]
+  ]
 
-kokoWelcome = [
-    "Witaj podróżniku! ",
+kokoWelcome =
+  [ "Witaj podróżniku! ",
     "Niestety żyjemy w ciężkich czasach.",
     "Nasza rodzina stoi w obliczu zagłady!",
     "Źli kłusownicy polują na nas i robią z naszych skór dywany! ",
@@ -130,33 +130,33 @@ kokoWelcome = [
     "Na pewno zostaniesz sowicie nagrodzony bananami, jeśli ci się uda",
     "",
     "<tak/nie>"
-    ]
+  ]
 
-kokoUebeQuestion = [
-    "Czy porozmawiałeś już z Uebe?"
-    ]
+kokoUebeQuestion =
+  [ "Czy porozmawiałeś już z Uebe?"
+  ]
 
-kokoEndingPhrase = [
-    "Oto nasz wybawca Bananine!"
-    ]
+kokoEndingPhrase =
+  [ "Oto nasz wybawca Bananine!"
+  ]
 
-kokoUebeQuestionNo = [
-    "A zatem wszyscy zginiemy!"
-    ]
+kokoUebeQuestionNo =
+  [ "A zatem wszyscy zginiemy!"
+  ]
 
-kokoUebeQuestionYes = [
-    "Och, dziękuję!",
+kokoUebeQuestionYes =
+  [ "Och, dziękuję!",
     "Powiadomię Uebe, mistrza starożytnych sztuk walki Tiu-Fiu",
     "o twojej dobroduszności, a na pewno ci pomoże!",
     "Poszukaj go na zachodzie."
-    ]
+  ]
 
-gnomDefault = [
-    "SpAdAj StąD!!!1!!"
-    ]
+gnomDefault =
+  [ "SpAdAj StąD!!!1!!"
+  ]
 
-gnomQuestion = [
-    "W starym forcie znowu wielka siła się zjawiła,",
+gnomQuestion =
+  [ "W starym forcie znowu wielka siła się zjawiła,",
     "kłusowników kiść dywanów wiele z nas zrobiła.",
     "Dnia takiego to mrocznego obudzi się w dżungli,",
     "Przedstawiciel brudnej, strasznej i złej rasy ludzi.",
@@ -173,10 +173,10 @@ gnomQuestion = [
     "<gnom przystawia ci do czoła karabin AK-47>",
     "Jakie zwierzę chodzi rano na 4 nogach,",
     "na 2 w ciągu dnia i na 3 wieczorem?"
-    ]
+  ]
 
-gnomGoodAnswer = [
-    "<Zaskoczony gnom odstawia AK-47 na bok>",
+gnomGoodAnswer =
+  [ "<Zaskoczony gnom odstawia AK-47 na bok>",
     "Hmmmm....",
     "Ciekawa odpowiedź...",
     "Jeszcze nikt nie podał do tej pory sensownej odpowiedzi,",
@@ -185,22 +185,22 @@ gnomGoodAnswer = [
     "Uznajmy, że przeszedłeś tę próbę, człowieku.",
     "<Gnom uderza cię w głowę i tracisz przytomność>",
     "<Po jakimś czasie budzisz się w klasztorze Tiu-Fiu>"
-    ]
+  ]
 
-gnomBadAnswer = [
-    "Żaden z ciebie Bananine!",
+gnomBadAnswer =
+  [ "Żaden z ciebie Bananine!",
     "GIŃ!"
-    ]
+  ]
 
 -- no zepsuty karabin opcja - dla uproszczenia
 
-uebeNoKokoTask = [
-    "Ludzie nie mają czego szukać w tym świętym miejscu.",
+uebeNoKokoTask =
+  [ "Ludzie nie mają czego szukać w tym świętym miejscu.",
     "Żegnam."
-    ]
+  ]
 
-uebeGivingProbaTask = [
-    "Podobno chcesz nam pomóc... Hmmm...",
+uebeGivingProbaTask =
+  [ "Podobno chcesz nam pomóc... Hmmm...",
     "Być może przepowiednia ziści się w twojej osobie?",
     "W każdym razie, jeżeli twoja pomoc okaże się owocna,",
     "nagrodzę cię dożywotnim zapasem bananów.",
@@ -208,15 +208,15 @@ uebeGivingProbaTask = [
     "musisz poprawnie przejść test w Jaskini Próby.",
     "<otwiera wrota jaskini próby>",
     "Nie martw się, to z pewnością bezpieczne."
-    ]
+  ]
 
-uebeProbaTask = [
-    "Wejdź do jaskini próby!",
+uebeProbaTask =
+  [ "Wejdź do jaskini próby!",
     "Przekonajmy się czy płynie w tobie krew Banana!"
-    ]
+  ]
 
-uebeAfterProba = [
-    "Interesujące...",
+uebeAfterProba =
+  [ "Interesujące...",
     "Jeśli pragniesz zostać moim uczniem i zgłębić tajniki Tiu-Fiu,",
     "najpierw udowodnij swoją wartość.",
     "Musisz odzyskać mój portfel ze starożytnej jaskini Kobry.",
@@ -226,18 +226,18 @@ uebeAfterProba = [
     "tylko wtedy pokonasz pająki z rodu Kobry, które gnieżdżą się w jaskini.",
     "<obsypuje cię potasem>",
     "Teraz, spróbuj rzucić na mnie zaklęcie Potassium! (zaatakuj Uebe)"
-    ]
+  ]
 
-uebeWalletTask = [
-    "Nie przychodź do mnie bez mojego portfela!"
-    ]
+uebeWalletTask =
+  [ "Nie przychodź do mnie bez mojego portfela!"
+  ]
 
-uebeAttackUebe = [
-    "Zaatakuj mnie zaklęciem Potassium!"
-    ]
+uebeAttackUebe =
+  [ "Zaatakuj mnie zaklęciem Potassium!"
+  ]
 
-uebeLearningTiuFiu = [
-    "Niesamowite!",
+uebeLearningTiuFiu =
+  [ "Niesamowite!",
     "Udało ci się!",
     "Nareszcie mogę spłacić kredyt.",
     "Teraz nauczę cię walczyć w stylu Tiu-Fiu.",
@@ -249,79 +249,79 @@ uebeLearningTiuFiu = [
     "On pozwoli ci pokonać złych zbrodniarzy.",
     "Oto starożytny klucz kiedyś znalazłem w zestawie Happy Meal - być może ci pomoże.",
     "... Powodzenia, przyjacielu."
-    ]
+  ]
 
-uebeLearnedTiuFiu = [
-    "Czy odnalazłeś już mój stary pistolet Luger Parabellum - Excaliber?",
+uebeLearnedTiuFiu =
+  [ "Czy odnalazłeś już mój stary pistolet Luger Parabellum - Excaliber?",
     "On pozwoli ci pokonać złych zbrodniarzy.",
     "...Powodzenia przyjacielu."
-    ]
+  ]
 
-uebeEnding = [
-    "Oto nasz wybawca Bananine!!",
+uebeEnding =
+  [ "Oto nasz wybawca Bananine!!",
     "A oto twoja nagroda: dożywotni zapas bananów;",
     "możesz do końca życia żyć w naszej rodzinie i cieszyć się naszymi bananami.",
     "Pokój z tobą.",
     "<ZWYCIĘSTWO>"
-    ]
+  ]
 
-boboDefault = [
-    "U! U! A! A! AAAA!!",
+boboDefault =
+  [ "U! U! A! A! AAAA!!",
     "BANANA!"
-    ]
+  ]
 
-andrzejDefault = [
-    "Nie rozmawiam z takimi jak ty!",
+andrzejDefault =
+  [ "Nie rozmawiam z takimi jak ty!",
     "Wynoś się stąd, albo przerobię cię na dywan!"
-    ]
+  ]
 
-pajakDefault = [
-    "ASSHSHSHHSHSHHHHH!!!"
-    ]
+pajakDefault =
+  [ "ASSHSHSHHSHSHHHHH!!!"
+  ]
 
 -- attacks
 
-uebeAttackDefault = [
-    "Jak śmiesz!?",
+uebeAttackDefault =
+  [ "Jak śmiesz!?",
     "<Uebe zabija cię magicznym zaklęciem Edudu>"
-    ]
+  ]
 
-uebeAttackTask = [
-    "Dobrze, jesteś gotowy.",
+uebeAttackTask =
+  [ "Dobrze, jesteś gotowy.",
     "Skieruj się teraz na wschód i odzyskaj mój portfel."
-    ]
+  ]
 
-boboAttack = [
-    "\"AAAAAAA!!!!\" - Bobo umiera.",
+boboAttack =
+  [ "\"AAAAAAA!!!!\" - Bobo umiera.",
     "Zaskoczony Koko wyrywa ci ręce."
-    ]
+  ]
 
-kokoAttack = [
-    "Koko patrzy na ciebie zazkoczony,",
+kokoAttack =
+  [ "Koko patrzy na ciebie zazkoczony,",
     "jednym szybkim ruchem wyrywa ci wszystkie kończyny."
-    ]
+  ]
 
-pajakKill = [
-    "Rzucasz na pająka zaklęcie mistrza Uebe - Potassium.",
+pajakKill =
+  [ "Rzucasz na pająka zaklęcie mistrza Uebe - Potassium.",
     "Pająk momentalnie kurczy się do rozmiaru naparstka, a ty go rozdeptujesz.",
     "Zauważasz, że z pająka wypadł portfel mistrza Uebe."
-    ]
+  ]
 
-pajakAttackDefault = [
-    "SSSDHHSHHSHSHSHHS",
+pajakAttackDefault =
+  [ "SSSDHHSHHSHSHSHHS",
     "<pająk z łatwością cię rozgniata na ścianie swoją wielką nogą>"
-    ]
+  ]
 
-andrzejKill = [
-    "Zastrzeliłeś łotrzyka Andrzeja.",
+andrzejKill =
+  [ "Zastrzeliłeś łotrzyka Andrzeja.",
     "Z jego spodni wypadł klucz do fortu."
-    ]
+  ]
 
-andrzejAttackDefault = [
-    "Andrzej jednym pchnięciem kłusowniczego sztyletu ",
+andrzejAttackDefault =
+  [ "Andrzej jednym pchnięciem kłusowniczego sztyletu ",
     "morduje cię i przerabia na dywan."
-    ]
+  ]
 
-unkillableDefault = [
-    "HAHA, nie możesz mnie zabić."
-    ]
+unkillableDefault =
+  [ "HAHA, nie możesz mnie zabić."
+  ]

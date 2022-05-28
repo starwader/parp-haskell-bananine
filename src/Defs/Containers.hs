@@ -5,6 +5,4 @@ import Defs.Skills
 
 type Container = String
 
-data ContainerData = ContainerData { store :: [Item], itemRequired :: Maybe Item }
-
-
+data ContainerData = ContainerData {store :: [Item], itemRequired :: Maybe Item}

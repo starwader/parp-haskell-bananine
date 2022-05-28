@@ -1,15 +1,14 @@
 module Defs.Locations where
 
 import qualified Data.Map.Strict as M
-
-import Defs.Npcs
-import Defs.Inventory
 import Defs.Containers
+import Defs.Inventory
+import Defs.Npcs
 
 -- locations
-   
+
 type Location = String
-   
+
 go :: Location -> Direction -> Maybe Location
 go "dżungla" North = Just "polanka"
 go "polanka" South = Just "dżungla"
@@ -28,25 +27,22 @@ go "dziedziniec" West = Just "rozwidlenie"
 go "dziedziniec" East = Just "fort"
 go "fort" West = Just "dziedziniec"
 go a b = Nothing
-   
 
 -- location data
-   
+
 findLocationData :: Location -> LocDataMap -> Maybe LocationData
-findLocationData loc locDataMap = locDataMap M.!? loc 
-   
-data LocationData = LocationData 
-    {
-        npcs :: [Npc],
-        items :: [Item],
-        containers :: M.Map Container ContainerData,
-        desc :: [String],
-        additionalDesc :: [String]
-    }
+findLocationData loc locDataMap = locDataMap M.!? loc
+
+data LocationData = LocationData
+  { npcs :: [Npc],
+    items :: [Item],
+    containers :: M.Map Container ContainerData,
+    desc :: [String],
+    additionalDesc :: [String]
+  }
 
 type LocDataMap = M.Map Location LocationData
 
 -- directions
 
 data Direction = North | South | West | East
-

@@ -4,5 +4,4 @@ import Defs.GameState
 import Defs.Locations
 
 teleports :: GameState -> Location -> GameState
-teleports gameState loc = gameState { currentLocation = loc }
-
+teleports gameState loc = gameState {currentLocation = loc}

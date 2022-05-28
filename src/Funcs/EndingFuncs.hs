@@ -1,13 +1,10 @@
 module Funcs.EndingFuncs where
 
-import Control.Monad.Trans.State.Strict
 import Control.Monad.Trans.Class
-import System.Exit
-
-import Funcs.IOFuncs
-
+import Control.Monad.Trans.State.Strict
 import Defs.GameState
-
+import Funcs.IOFuncs
+import System.Exit
 
 exit = exitSuccess
 
@@ -18,5 +15,5 @@ win = do
 
 die :: GameStateIOT
 die = do
-  lift $ printLines ["","Umarłeś"]
+  lift $ printLines ["", "Umarłeś"]
   lift exit
