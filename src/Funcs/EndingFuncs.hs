@@ -9,7 +9,7 @@ import Funcs.IOFuncs
 import Defs.GameState
 
 
-exit = exitWith(ExitSuccess)
+exit = exitSuccess
 
 win :: GameStateIOT
 win = do
@@ -18,5 +18,5 @@ win = do
 
 die :: GameStateIOT
 die = do
-  lift $ printLines ["","Umarłeś"] 
+  lift $ printLines ["","Umarłeś"]
   lift exit

@@ -20,7 +20,7 @@ import Funcs.ItemFuncs
 import Funcs.MoveFuncs
 
 interacts :: Interaction -> [String] -> GameStateIOT
-interacts interaction cmdsarg = do 
+interacts interaction cmdsarg = do
   let safeInteracted = headMay cmdsarg
   case safeInteracted of
     Nothing -> lift $ printInteractionError interaction
@@ -30,30 +30,32 @@ interacts interaction cmdsarg = do
       case findLocationData loc $ locationsData gameState of
         Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
         Just locationData -> do
-          case interaction of 
-            Talk -> talks interacted locationData 
-            Drop -> drops interacted locationData 
-            Attack -> attacks interacted locationData 
-            Pickup -> pickups interacted locationData 
+          case interaction of
+            Talk -> talks interacted locationData
+            Drop -> drops interacted locationData
+            Attack -> attacks interacted locationData
+            Pickup -> pickups interacted locationData
             Open -> containerInteracts interaction interacted (tail cmdsarg) locationData
             Putin -> containerInteracts interaction interacted (tail cmdsarg) locationData
             Takeout -> containerInteracts interaction interacted (tail cmdsarg) locationData
-            
+
 
 putins :: Item -> Container -> LocationData -> GameStateIOT
 putins item container locationData = do
   gameState <- get
-  if itemInInventory item gameState then 
+  if itemInInventory item gameState then
     case containers locationData M.!? container of
       Nothing -> lift $ printInteractionError Open
-      Just oldContainerData -> do 
+      Just oldContainerData -> do
         lift $ printLines ["Odłożyłeś przedmiot " ++ item ++ " do " ++ container]
-        let newContainerData = oldContainerData {store = item:(store oldContainerData)} 
+        let newContainerData = oldContainerData {store = item:store oldContainerData}
         let newLocationData = locationData {containers = M.insert container newContainerData (containers locationData)}
-        modify (\x -> gameState {
-           inventory = filter (/=item) (inventory gameState),
-           locationsData = M.insert (currentLocation gameState) newLocationData $ locationsData gameState
-           })
+        modify (const
+          gameState
+            {inventory = filter (/= item) (inventory gameState),
+             locationsData = M.insert
+                               (currentLocation gameState) newLocationData
+                               $ locationsData gameState})
   else
     lift $ printInteractionError Drop
 
@@ -62,16 +64,18 @@ takeouts item container locationData = do
   gameState <- get
   case containers locationData M.!? container of
     Nothing -> lift $ printInteractionError Open
-    Just oldContainerData -> do 
-      if elem item $ store oldContainerData then do  
+    Just oldContainerData -> do
+      if elem item $ store oldContainerData then do
         lift $ printLines ["Wyciągnąłeś przedmiot " ++ item ++ " z " ++ container]
-        let newContainerData = oldContainerData {store = filter (/=item) (store oldContainerData)} 
+        let newContainerData = oldContainerData {store = filter (/=item) (store oldContainerData)}
         let newLocationData = locationData {containers = M.insert container newContainerData (containers locationData)}
-        modify (\x -> gameState {
-           inventory = item:(inventory gameState),
-           locationsData = M.insert (currentLocation gameState) newLocationData $ locationsData gameState
-           })
-      else 
+        modify (const
+          gameState
+            {inventory = item : (inventory gameState),
+             locationsData = M.insert
+                               (currentLocation gameState) newLocationData
+                               $ locationsData gameState})
+      else
         lift $ printLines ["W " ++ container ++ " nie ma przedmiotu " ++ item]
 
 
@@ -83,43 +87,45 @@ containerInteracts interaction interacted cmds locationData = do
                    2 -> headMay $ reverse cmds
                    _ -> Nothing
 
-  if length cmds == 0 && interaction /= Open then
+  if null cmds && interaction /= Open then
     lift $ printLines ["Nieznana komenda - za mało argumentów"]
   else
    case maybeContname of
     Nothing -> lift $ printLines ["Nieznana komenda - nieprawidłowe argumenty"]
     Just contname -> do
-          case (containers locationData) M.!? contname of 
+          case containers locationData M.!? contname of
             Nothing -> lift $ printInteractionError Open
-            Just cont -> do 
+            Just cont -> do
               let canBeOpened = case itemRequired cont of
-                                  Nothing -> True  
-                                  Just requirement -> if elem requirement $ inventory gameState then True else False
-              if canBeOpened then do      
-                case interaction of 
+                                  Nothing -> True
+                                  Just requirement -> elem requirement $ inventory gameState
+              if canBeOpened then do
+                case interaction of
                   Takeout -> takeouts interacted contname locationData
                   Putin -> putins interacted contname locationData
                   Open -> opens contname locationData
                   _ -> lift $ printLines ["Nieprawidłowa interakcja"]
-              else 
+              else
                 lift $ printLines ["Nie masz niczego co może otworzyć ten kontener"]
 
 opens :: String -> LocationData -> GameStateIOT
 opens containerName locationData = do
-  case (containers locationData) M.!? containerName of 
+  case containers locationData M.!? containerName of
     Nothing -> lift $ printInteractionError Open
-    Just cont -> printListWithDescFail ("Zawartość " ++ containerName ++ ":") ("Kontener " ++ containerName ++ " jest pusty") $ store cont 
+    Just cont -> printListWithDescFail ("Zawartość " ++ containerName ++ ":") ("Kontener " ++ containerName ++ " jest pusty") $ store cont
 
 drops :: Item -> LocationData -> GameStateIOT
 drops item locationData = do
   gameState <- get
   let inv = inventory gameState
-  if elem item inv then do  
-    let newLocationData = locationData {items = item:(items locationData)} 
-    modify (\x -> gameState {
-        inventory = filter (/=item) inv,
-        locationsData = M.insert (currentLocation gameState) newLocationData $ locationsData gameState
-        })
+  if item `elem` inv then do
+    let newLocationData = locationData {items = item:items locationData}
+    modify (const
+      gameState
+        {inventory = filter (/= item) inv,
+         locationsData = M.insert
+                           (currentLocation gameState) newLocationData
+                           $ locationsData gameState})
     lift $ printLines ["Upuściłeś ", item]
   else
     lift $ printInteractionError Drop
@@ -127,12 +133,14 @@ drops item locationData = do
 pickups :: Item -> LocationData -> GameStateIOT
 pickups item locationData = do
   gameState <- get
-  if elem item $ items locationData then do  
-    let newLocationData = locationData {items = filter (/=item) $ items locationData} 
-    modify (\x -> gameState {
-        inventory = item:(inventory gameState),
-        locationsData = M.insert (currentLocation gameState) newLocationData $ locationsData gameState
-        })
+  if elem item $ items locationData then do
+    let newLocationData = locationData {items = filter (/=item) $ items locationData}
+    modify (const
+      gameState
+        {inventory = item : (inventory gameState),
+         locationsData = M.insert
+                           (currentLocation gameState) newLocationData
+                           $ locationsData gameState})
     lift $ printLines ["Podniosłeś ", item]
   else
     lift $ printInteractionError Pickup

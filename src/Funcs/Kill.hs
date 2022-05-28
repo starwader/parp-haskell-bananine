@@ -20,6 +20,7 @@ kill npc loc = do
     Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
     Just locationData -> do
       let newLocationData = locationData {npcs = filter (/=npc) $ items locationData}
-      modify (\x -> gameState {
-        locationsData = M.insert loc newLocationData $ locationsData gameState
-      })
+      modify (const
+        gameState
+          {locationsData = M.insert loc newLocationData
+                             $ locationsData gameState})

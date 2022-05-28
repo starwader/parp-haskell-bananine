@@ -28,14 +28,14 @@ import Funcs.Interactions
 -- Projekt PARP 2022L
 
 
-    
+
 gameLoop :: GameStateIOT
 gameLoop = do
     s <- get
-    cmd:cmds <- lift $ readCommand
+    cmd:cmds <- lift readCommand
     case cmd of
         "pomoc" -> do lift $ printLines instructionsText
-                      gameLoop 
+                      gameLoop
 
         "n" -> do gos North
                   gameLoop
@@ -48,16 +48,16 @@ gameLoop = do
 
         "rozmawiaj" -> do interacts Talk cmds
                           gameLoop
-         
+
         "atakuj" -> do interacts Attack cmds
                        gameLoop
 
-        "upuść" -> do interacts Drop cmds 
+        "upuść" -> do interacts Drop cmds
                       gameLoop
 
-        "podnieś" -> do interacts Pickup cmds 
+        "podnieś" -> do interacts Pickup cmds
                         gameLoop
-        
+
         "otwórz" -> do interacts Open cmds
                        gameLoop
 
@@ -73,8 +73,8 @@ gameLoop = do
         "zadania" -> do printListWithDescFail "Aktywne zadania:" "Brak aktywnych zadań" $ tasks s
                         printListWithDescFail "Zakończone zadania:" "Nie zakończyłeś jeszcze żadnego zadania" $ finishedTasks s
                         gameLoop
-                        
-        "ekwipunek" -> do printListWithDescFail "Ekwipunek:" "Twój ekwipunek jest pusty" $ inventory s 
+
+        "ekwipunek" -> do printListWithDescFail "Ekwipunek:" "Twój ekwipunek jest pusty" $ inventory s
                           gameLoop
 
         "umiejętności" -> do printListWithDescFail "Umiejętności:" "Nie masz żadnych umiejętności :(" $ skills s
@@ -83,12 +83,11 @@ gameLoop = do
         "koniec" -> return ()
 
         _ -> do lift $ printLines ["Nieznana komenda", ""]
-                gameLoop 
+                gameLoop
 
 gameMain :: IO()
 gameMain = do
     printLines introductionText
-    runStateT printDescription initialGameState 
+    runStateT printDescription initialGameState
     printLines instructionsText
-    void $ runStateT gameLoop initialGameState 
-
+    void $ runStateT gameLoop initialGameState

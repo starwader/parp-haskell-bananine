@@ -12,14 +12,17 @@ addTask :: Task -> GameStateIOT
 addTask task = do
   gameState <- get
   lift $ printLines ["","    Rozpoczęto zadanie: " ++ task]
-  modify (\x ->gameState{tasks = task:(tasks gameState)})
+  modify (const gameState {tasks = task : tasks gameState})
 
 finishTask :: Task -> GameStateIOT
 finishTask task = do
   gameState <- get
   if elem task $ tasks gameState then do
     lift $ printLines ["","    Zadanie zakończone: " ++ task]
-    modify (\x -> gameState {finishedTasks = task:(finishedTasks gameState), tasks = filter (/=task) $ tasks gameState})
+    modify (const
+      gameState
+        {finishedTasks = task : finishedTasks gameState,
+         tasks = filter (/= task) $ tasks gameState})
   else
     lift $ printLines ["Zadanie ", task, " nie jest rozpoczęte"]
 

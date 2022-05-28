@@ -11,7 +11,7 @@ import Consts.TextConstants
 
 
 emptyLocationData = LocationData {
-    containers = M.fromList [],
+    containers = M.empty,
     npcs = [],
     items = [],
     desc = [],
@@ -29,10 +29,10 @@ initialLocationsData = M.fromList [
             containers = M.fromList [
               ("beczka", emptyContainer {
                 store = ["zgniły_banan"]
-                } 
+                }
               )
               ],
-            
+
             desc = dzunglaDesc
         }
     ),("polanka", emptyLocationData {
@@ -44,7 +44,7 @@ initialLocationsData = M.fromList [
             desc = klasztorDesc
         }
     ),("kamieniołom", emptyLocationData {
-            desc = kamieniolomDesc, 
+            desc = kamieniolomDesc,
             containers = M.fromList [
                 ("skrzynia", emptyContainer {
                   store = ["Excaliber"],
@@ -77,8 +77,8 @@ initialLocationsData = M.fromList [
 initialGameState = GameState {
     tasks = [],
     finishedTasks = [],
-    inventory = [], 
-    currentLocation = "dżungla", 
+    inventory = [],
+    currentLocation = "dżungla",
     skills = [],
     locationsData = initialLocationsData
     }

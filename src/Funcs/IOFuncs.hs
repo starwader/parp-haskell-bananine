@@ -14,31 +14,31 @@ import Consts.TextConstants
 
 printLines :: [String] -> IO ()
 printLines xs = putStr (unlines xs)
- 
+
 printLocation :: Location -> IO ()
 printLocation l = do
     let toPrint = "Znajdujesz sie w:"
     printLines [toPrint, l]
- 
+
 readCommand :: IO [String]
 readCommand = do
     putStr "> "
     hFlush stdout
     xs <- getLine
-    let splitxs = splitOn " " xs 
+    let splitxs = splitOn " " xs
     return splitxs
 
 printListWithDesc :: String -> [String] -> GameStateIOT
 printListWithDesc desc toPrintList = do
-  if length toPrintList /= 0 then  
-    lift $ printLines $ desc:(map ("- "++) toPrintList)
+  if not (null toPrintList) then
+    lift $ printLines $ desc:map ("- "++) toPrintList
   else
     lift $ putStr ""  --todo
 
 printListWithDescFail :: String -> String -> [String] -> GameStateIOT
 printListWithDescFail desc failMsg toPrintList = do
-  if length toPrintList /= 0 then  
-    lift $ printLines $ desc:(map ("- "++) toPrintList)
+  if not (null toPrintList) then
+    lift $ printLines $ desc:map ("- "++) toPrintList
   else
     lift $ printLines [failMsg]
 

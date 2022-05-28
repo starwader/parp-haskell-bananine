@@ -12,4 +12,4 @@ addSkill :: Skill -> GameStateIOT
 addSkill skill = do
   gameState <- get
   lift $ printLines ["","    Nowa umiejętność: " ++ skill]
-  modify (\x ->gameState{skills = skill:(skills gameState)})
+  modify (const gameState {skills = skill : (skills gameState)})
