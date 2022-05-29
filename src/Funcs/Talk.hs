@@ -61,54 +61,12 @@ talk "Uebe" = do
   let active_task = firstActiveTask task_order gameState
   let last_task = lastFinishedTask task_order gameState
   talkUebeWithTask last_task active_task
-  -- if noTaskYet taskTalkUebe gameState
-  --   then do
-  --     lift $ printLines uebeNoKokoTask
-  --   else
-  --     if activeTask taskTalkUebe gameState
-  --       then do
-  --         lift $ printLines uebeGivingProbaTask
-  --         addTask taskTrial
-  --         finishTask taskTalkUebe
-  --       else
-  --         if activeTask taskTrial gameState -- proba jeszcze nieukonczona
-  --           then lift $ printLines uebeProbaTask
-  --           else
-  --             if finishedTask taskTrial gameState
-  --               then do
-  --                 if noTaskYet taskAttackUebe gameState
-  --                   then do
-  --                     lift $ printLines uebeAfterProba
-  --                     addTask taskAttackUebe
-  --                     addSkill "zaklęcie Potassium"
-  --                   else
-  --                     if activeTask taskAttackUebe gameState
-  --                       then lift $ printLines uebeAttackUebe
-  --                       else
-  --                         if activeTask taskFindWallet gameState
-  --                           then do
-  --                             if elem "portfel" $ inventory gameState
-  --                               then do
-  --                                 lift $ printLines uebeLearningTiuFiu
-  --                                 delItemFromInventory "portfel"
-  --                                 addItemToInventory "klucz"
-  --                                 addSkill "Tiu Fiu"
-  --                                 finishTask taskFindWallet
-  --                                 addTask taskKillBadGuys
-  --                               else lift $ printLines uebeWalletTask
-  --                           -- else
-  --                           --   if activeTask taskKillBadGuys gameState
-  --                           --     then lift $ printLines uebeLearnedTiuFiu
-  --                           --     else
-  --                           --       if finishedTask taskKillBadGuys gameState
-  --                           --         then do
-  --                           --           lift $ printLines uebeEnding
-  --                           --           win
-  --                           --         else lift $ printLines ["błąd 2"]
-  --               else lift $ printLines ["błąd 1"]
+
 talk _ = do
   lift $ printLines ["Ta postać nie ma zaimplementowanej rozmowy"]
 
+-- first parameter: last finished task
+-- second parameter: current active task
 talkUebeWithTask :: Maybe Task -> Maybe Task -> GameStateIOT
 talkUebeWithTask Nothing Nothing = do
   lift $ printLines uebeNoKokoTask
@@ -151,4 +109,4 @@ talkUebeWithTask (Just (Task TaskKillBadGuys _)) _ = do
 
 talkUebeWithTask _ _ = do 
   gameState <- get
-  lift $ printLines ["kotlet"]
+  lift $ printLines ["Czego chcesz?"]

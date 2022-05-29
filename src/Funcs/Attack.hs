@@ -38,7 +38,6 @@ attack "Andrzej" = do
       die
 attack "Pająk" = do
   gameState <- get
-  --if activeTask taskFindWallet gameState then do
   if elem "zaklęcie Potassium" $ skills gameState
     then do
       lift $ printLines pajakKill

@@ -35,9 +35,6 @@ finishedTask t gameState = elem t $ finishedTasks gameState
 activeTask :: Task -> GameState -> Bool
 activeTask t gameState = elem t $ tasks gameState
 
---finFirstNoSecondTask :: Task -> Task -> GameState -> Bool
---finFirstNoSecondTask t1 t2 gameState = finishedTask t1 gameState and noTaskYet t2 gameState
-
 noTaskYet :: Task -> GameState -> Bool
 noTaskYet t gameState = do
   let fts = finishedTasks gameState
