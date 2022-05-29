@@ -14,6 +14,7 @@ import Funcs.SkillFuncs
 import Funcs.TaskFuncs
 import Funcs.Teleport
 
+-- rozmowa z npc
 talk :: Npc -> GameStateIOT
 talk "Koko" = do
   gameState <- get
@@ -65,7 +66,8 @@ talk "Uebe" = do
 talk _ = do
   lift $ printLines ["Ta postać nie ma zaimplementowanej rozmowy"]
 
--- first parameter: last finished task
+-- 
+-- pierwszy parametr: ostatenie zakończone zadanie
 -- second parameter: current active task
 talkUebeWithTask :: Maybe Task -> Maybe Task -> GameStateIOT
 talkUebeWithTask Nothing Nothing = do

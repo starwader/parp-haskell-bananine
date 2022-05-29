@@ -7,6 +7,7 @@ import Defs.GameState
 import Defs.Locations
 import Defs.Tasks
 
+-- pomocnicze, puste LocationData i Container
 emptyLocationData =
   LocationData
     { containers = M.empty,
@@ -22,6 +23,7 @@ emptyContainer =
       itemRequired = Nothing
     }
 
+-- dane początkowe dla GameState
 initialLocationsData =
   M.fromList
     [ ( "dżungla",

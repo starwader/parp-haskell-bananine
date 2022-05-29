@@ -17,6 +17,7 @@ import Funcs.MoveFuncs
 import Funcs.Talk
 import Safe
 
+-- funkcja wspólna dla interakcji z różnymi tworami (np przeciwnikami, skrzyniami, przedmiotami)
 interacts :: Interaction -> [String] -> GameStateIOT
 interacts interaction cmdsarg = do
   let safeInteracted = headMay cmdsarg
@@ -37,6 +38,7 @@ interacts interaction cmdsarg = do
             Put -> containerInteracts interaction interacted (tail cmdsarg) locationData
             Takeout -> containerInteracts interaction interacted (tail cmdsarg) locationData
 
+-- odłożenie przedmiotu
 puts :: Item -> Container -> LocationData -> GameStateIOT
 puts item container locationData = do
   gameState <- get
@@ -60,6 +62,7 @@ puts item container locationData = do
           )
     else lift $ printInteractionError Drop
 
+-- podniesienie przedmiotu z kontenera
 takeouts :: Item -> Container -> LocationData -> GameStateIOT
 takeouts item container locationData = do
   gameState <- get
@@ -84,6 +87,7 @@ takeouts item container locationData = do
             )
         else lift $ printLines ["W " ++ container ++ " nie ma przedmiotu " ++ item]
 
+-- interakcja z kontenerem
 containerInteracts :: Interaction -> String -> [String] -> LocationData -> GameStateIOT
 containerInteracts interaction interacted cmds locationData = do
   gameState <- get
@@ -112,12 +116,14 @@ containerInteracts interaction interacted cmds locationData = do
                   _ -> lift $ printLines ["Nieprawidłowa interakcja"]
               else lift $ printLines ["Nie masz niczego co może otworzyć ten kontener"]
 
+-- sprawdzenie zawartości kontenera
 opens :: String -> LocationData -> GameStateIOT
 opens containerName locationData = do
   case containers locationData M.!? containerName of
     Nothing -> lift $ printInteractionError Open
     Just cont -> printListWithDescFail ("Zawartość " ++ containerName ++ ":") ("Kontener " ++ containerName ++ " jest pusty") $ store cont
 
+-- upuszczenie przedmiotu
 drops :: Item -> LocationData -> GameStateIOT
 drops item locationData = do
   gameState <- get
@@ -139,6 +145,7 @@ drops item locationData = do
       lift $ printLines ["Upuściłeś ", item]
     else lift $ printInteractionError Drop
 
+-- podniesienie przedmiotu
 pickups :: Item -> LocationData -> GameStateIOT
 pickups item locationData = do
   gameState <- get
@@ -156,12 +163,14 @@ pickups item locationData = do
       lift $ printLines ["Podniosłeś ", item]
     else lift $ printInteractionError Pickup
 
+-- rozmowa z npc
 talks :: Npc -> LocationData -> GameStateIOT
 talks npc locationData = do
   if elem npc $ npcs locationData
     then talk npc
     else lift $ printInteractionError Talk
 
+-- atak na npc
 attacks :: Npc -> LocationData -> GameStateIOT
 attacks npc locationData = do
   if elem npc $ npcs locationData

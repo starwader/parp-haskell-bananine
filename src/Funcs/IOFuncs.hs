@@ -10,14 +10,17 @@ import Defs.Interactions
 import Defs.Locations
 import System.IO
 
+-- wypisanie listy ciągów znaków
 printLines :: [String] -> IO ()
 printLines xs = putStr (unlines xs)
 
+-- wypisanie aktualnej lokalizacji
 printLocation :: Location -> IO ()
 printLocation l = do
   let toPrint = "Znajdujesz się w:"
   printLines [toPrint, l]
 
+-- wczytanie komendy
 readCommand :: IO [String]
 readCommand = do
   putStr "> "
@@ -26,18 +29,21 @@ readCommand = do
   let splitxs = splitOn " " xs
   return splitxs
 
+-- wypisanie listy z opisem
 printListWithDesc :: String -> [String] -> GameStateIOT
 printListWithDesc desc toPrintList = do
   if not (null toPrintList)
     then lift $ printLines $ desc : map ("- " ++) toPrintList
-    else lift $ putStr "" --todo
+    else lift $ putStr "" 
 
+-- wypisanie listy z opisem z określeniem komunikatu niepowodzenia 
 printListWithDescFail :: String -> String -> [String] -> GameStateIOT
 printListWithDescFail desc failMsg toPrintList = do
   if not (null toPrintList)
     then lift $ printLines $ desc : map ("- " ++) toPrintList
     else lift $ printLines [failMsg]
 
+-- wypisanie opisu lokalizacji
 printDescription :: GameStateIOT
 printDescription = do
   gameState <- get

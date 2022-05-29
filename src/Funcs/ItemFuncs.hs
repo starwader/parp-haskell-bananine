@@ -8,6 +8,7 @@ import Defs.Inventory
 import Defs.Locations
 import Funcs.IOFuncs
 
+-- stworzenie nowego przedmiotu w lokalizacji
 newItem :: Item -> GameStateIOT
 newItem item = do
   gameState <- get
@@ -26,12 +27,14 @@ newItem item = do
         )
       lift $ printLines ["Możesz podnieść nowy przedmiot: ", item]
 
+-- dodanie nowego przedmiotu do ekwipunku
 addItemToInventory :: Item -> GameStateIOT
 addItemToInventory item = do
   gameState <- get
   lift $ printLines ["", "    Przedmiot " ++ item ++ " został dodany do ekwipunku"]
   modify (const gameState {inventory = item : inventory gameState})
 
+-- usunięcie przedmiotu z ekwipunku
 delItemFromInventory :: Item -> GameStateIOT
 delItemFromInventory item = do
   gameState <- get
@@ -41,5 +44,6 @@ delItemFromInventory item = do
         gameState {inventory = filter (/= item) $ inventory gameState}
     )
 
+-- sprawdzenie czy przedmiot jest w ekwipunku
 itemInInventory :: Item -> GameState -> Bool
 itemInInventory item gameState = elem item $ inventory gameState

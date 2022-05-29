@@ -13,6 +13,7 @@ import Funcs.TaskFuncs
 
 import Consts.TextConstants
 
+-- przejście do innego miejsca
 gos :: Direction -> GameStateIOT
 gos d = do
     gameState <- get
@@ -20,6 +21,7 @@ gos d = do
     let nextLocMaybe = go oldLoc d
     tryChangeLocation nextLocMaybe
 
+-- funkcja zmieniająca miejsce 
 tryChangeLocation :: Maybe String -> GameStateIOT
 tryChangeLocation Nothing = do
     lift $ printLines ["Nie możesz tędy iść", ""]

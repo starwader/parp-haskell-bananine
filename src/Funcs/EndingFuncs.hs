@@ -6,6 +6,8 @@ import Defs.GameState
 import Funcs.IOFuncs
 import System.Exit
 
+-- funkcje kończące grę
+
 exit = exitSuccess
 
 win :: GameStateIOT

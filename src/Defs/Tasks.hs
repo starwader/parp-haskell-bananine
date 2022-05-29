@@ -9,6 +9,8 @@ data Task = Task
         task_desc :: TaskDesc
     } deriving(Eq)
 
+-- wszystkie zadania w grze
+
 taskTrial = Task TaskTrial "przejdź próbę w jaskini Próby"
 
 taskTalkUebe = Task TaskTalkUebe "porozmawiaj z Uebe"

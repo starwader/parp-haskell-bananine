@@ -8,6 +8,7 @@ import Defs.Locations
 import Defs.Npcs
 import Funcs.IOFuncs
 
+-- zabicie npc
 kill :: Npc -> Location -> GameStateIOT
 kill npc loc = do
   gameState <- get

@@ -1,4 +1,5 @@
 module Consts.TextConstants where
+-- stałe tekstowe
 
 introductionText =
   [ "Jest rok 1950.",

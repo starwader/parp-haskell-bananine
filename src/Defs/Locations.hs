@@ -5,10 +5,11 @@ import Defs.Containers
 import Defs.Inventory
 import Defs.Npcs
 
--- locations
+-- lokalizacje
 
 type Location = String
 
+-- określenie możliwych ścieżek 
 go :: Location -> Direction -> Maybe Location
 go "dżungla" North = Just "polanka"
 go "polanka" South = Just "dżungla"
@@ -28,8 +29,9 @@ go "dziedziniec" East = Just "fort"
 go "fort" West = Just "dziedziniec"
 go a b = Nothing
 
--- location data
+-- dane lokalizacji
 
+-- znalezienie locationData w mapie locationData
 findLocationData :: Location -> LocDataMap -> Maybe LocationData
 findLocationData loc locDataMap = locDataMap M.!? loc
 
@@ -43,6 +45,6 @@ data LocationData = LocationData
 
 type LocDataMap = M.Map Location LocationData
 
--- directions
+-- strony świata
 
 data Direction = North | South | West | East

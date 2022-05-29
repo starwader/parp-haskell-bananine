@@ -6,6 +6,7 @@ import Defs.GameState
 import Defs.Skills
 import Funcs.IOFuncs
 
+-- dodanie umiejętności
 addSkill :: Skill -> GameStateIOT
 addSkill skill = do
   gameState <- get

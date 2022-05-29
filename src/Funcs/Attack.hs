@@ -15,6 +15,8 @@ import Funcs.Kill
 import Funcs.SkillFuncs
 import Funcs.TaskFuncs
 
+-- logika walki z przeciwnikami
+
 attack :: Npc -> GameStateIOT
 attack "Koko" = do
   lift $ printLines kokoAttack

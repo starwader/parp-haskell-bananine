@@ -7,6 +7,8 @@ import Defs.Locations
 import Defs.Skills
 import Defs.Tasks
 
+-- główny stan gry
+
 data GameState = GameState
   { tasks :: [Task],
     finishedTasks :: [Task],
@@ -16,4 +18,6 @@ data GameState = GameState
     locationsData :: M.Map Location LocationData
   }
 
+
+-- transformata StateT (tworzy monadę z GameState i IO)
 type GameStateIOT = StateT GameState IO ()

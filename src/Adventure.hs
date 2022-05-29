@@ -84,6 +84,7 @@ gameLoop = do
       lift $ printLines ["Nieznana komenda", ""]
       gameLoop
 
+-- rozpoczęcie gry
 gameMain :: IO ()
 gameMain = do
   printLines introductionText
