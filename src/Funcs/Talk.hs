@@ -54,52 +54,101 @@ talk "Gnom" = do
           lift $ printLines gnomBadAnswer
           die
     else lift $ printLines gnomDefault
+
 talk "Uebe" = do
   gameState <- get
-  if noTaskYet taskTalkUebe gameState
-    then do
-      lift $ printLines uebeNoKokoTask
-    else
-      if activeTask taskTalkUebe gameState
-        then do
-          lift $ printLines uebeGivingProbaTask
-          addTask taskTrial
-          finishTask taskTalkUebe
-        else
-          if activeTask taskTrial gameState -- proba jeszcze nieukonczona
-            then lift $ printLines uebeProbaTask
-            else
-              if finishedTask taskTrial gameState
-                then do
-                  if noTaskYet taskAttackUebe gameState
-                    then do
-                      lift $ printLines uebeAfterProba
-                      addTask taskAttackUebe
-                      addSkill "zaklęcie Potassium"
-                    else
-                      if activeTask taskAttackUebe gameState
-                        then lift $ printLines uebeAttackUebe
-                        else
-                          if activeTask taskFindWallet gameState
-                            then do
-                              if elem "portfel" $ inventory gameState
-                                then do
-                                  lift $ printLines uebeLearningTiuFiu
-                                  delItemFromInventory "portfel"
-                                  addItemToInventory "klucz"
-                                  addSkill "Tiu Fiu"
-                                  finishTask taskFindWallet
-                                  addTask taskKillBadGuys
-                                else lift $ printLines uebeWalletTask
-                            else
-                              if activeTask taskKillBadGuys gameState
-                                then lift $ printLines uebeLearnedTiuFiu
-                                else
-                                  if finishedTask taskKillBadGuys gameState
-                                    then do
-                                      lift $ printLines uebeEnding
-                                      win
-                                    else lift $ printLines ["błąd 2"]
-                else lift $ printLines ["błąd 1"]
+  let task_order = [taskTalkUebe, taskTrial, taskAttackUebe, taskFindWallet, taskKillBadGuys]
+  let active_task = firstActiveTask task_order gameState
+  let last_task = lastFinishedTask task_order gameState
+  talkUebeWithTask last_task active_task
+  -- if noTaskYet taskTalkUebe gameState
+  --   then do
+  --     lift $ printLines uebeNoKokoTask
+  --   else
+  --     if activeTask taskTalkUebe gameState
+  --       then do
+  --         lift $ printLines uebeGivingProbaTask
+  --         addTask taskTrial
+  --         finishTask taskTalkUebe
+  --       else
+  --         if activeTask taskTrial gameState -- proba jeszcze nieukonczona
+  --           then lift $ printLines uebeProbaTask
+  --           else
+  --             if finishedTask taskTrial gameState
+  --               then do
+  --                 if noTaskYet taskAttackUebe gameState
+  --                   then do
+  --                     lift $ printLines uebeAfterProba
+  --                     addTask taskAttackUebe
+  --                     addSkill "zaklęcie Potassium"
+  --                   else
+  --                     if activeTask taskAttackUebe gameState
+  --                       then lift $ printLines uebeAttackUebe
+  --                       else
+  --                         if activeTask taskFindWallet gameState
+  --                           then do
+  --                             if elem "portfel" $ inventory gameState
+  --                               then do
+  --                                 lift $ printLines uebeLearningTiuFiu
+  --                                 delItemFromInventory "portfel"
+  --                                 addItemToInventory "klucz"
+  --                                 addSkill "Tiu Fiu"
+  --                                 finishTask taskFindWallet
+  --                                 addTask taskKillBadGuys
+  --                               else lift $ printLines uebeWalletTask
+  --                           -- else
+  --                           --   if activeTask taskKillBadGuys gameState
+  --                           --     then lift $ printLines uebeLearnedTiuFiu
+  --                           --     else
+  --                           --       if finishedTask taskKillBadGuys gameState
+  --                           --         then do
+  --                           --           lift $ printLines uebeEnding
+  --                           --           win
+  --                           --         else lift $ printLines ["błąd 2"]
+  --               else lift $ printLines ["błąd 1"]
 talk _ = do
   lift $ printLines ["Ta postać nie ma zaimplementowanej rozmowy"]
+
+talkUebeWithTask :: Maybe Task -> Maybe Task -> GameStateIOT
+talkUebeWithTask Nothing Nothing = do
+  lift $ printLines uebeNoKokoTask
+
+talkUebeWithTask _ (Just (Task TaskTalkUebe _)) = do
+  lift $ printLines uebeGivingProbaTask
+  addTask taskTrial
+  finishTask taskTalkUebe
+
+talkUebeWithTask _ (Just (Task TaskTrial _)) = do
+  lift $ printLines uebeProbaTask
+
+talkUebeWithTask (Just (Task TaskTrial _)) Nothing = do
+  lift $ printLines uebeAfterProba
+  addTask taskAttackUebe
+  addSkill "zaklęcie Potassium"
+
+talkUebeWithTask _ (Just (Task TaskAttackUebe _)) = do
+  lift $ printLines uebeAttackUebe
+
+talkUebeWithTask _ (Just (Task TaskFindWallet _)) = do
+  gameState <- get
+  if elem "portfel" $ inventory gameState
+    then do
+      lift $ printLines uebeLearningTiuFiu
+      delItemFromInventory "portfel"
+      addItemToInventory "klucz"
+      addSkill "Tiu Fiu"
+      finishTask taskFindWallet
+      addTask taskKillBadGuys
+    else lift $ printLines uebeWalletTask
+
+talkUebeWithTask _ (Just (Task TaskKillBadGuys _)) = do 
+  lift $ printLines uebeLearnedTiuFiu
+
+talkUebeWithTask (Just (Task TaskKillBadGuys _)) _ = do
+  gameState <- get
+  lift $ printLines uebeEnding
+  win
+
+talkUebeWithTask _ _ = do 
+  gameState <- get
+  lift $ printLines ["kotlet"]

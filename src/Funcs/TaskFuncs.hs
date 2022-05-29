@@ -5,11 +5,13 @@ import Control.Monad.Trans.State.Strict
 import Defs.GameState
 import Defs.Tasks
 import Funcs.IOFuncs
+import Data.Maybe (listToMaybe)
+import Data.List (find)
 
 addTask :: Task -> GameStateIOT
 addTask task = do
   gameState <- get
-  lift $ printLines ["", "    Rozpoczęto zadanie: " ++ task]
+  lift $ printLines ["", "    Rozpoczęto zadanie: " ++ task_desc task]
   modify (const gameState {tasks = task : tasks gameState})
 
 finishTask :: Task -> GameStateIOT
@@ -17,7 +19,7 @@ finishTask task = do
   gameState <- get
   if elem task $ tasks gameState
     then do
-      lift $ printLines ["", "    Zadanie zakończone: " ++ task]
+      lift $ printLines ["", "    Zadanie zakończone: " ++ task_desc task]
       modify
         ( const
             gameState
@@ -25,7 +27,7 @@ finishTask task = do
                 tasks = filter (/= task) $ tasks gameState
               }
         )
-    else lift $ printLines ["Zadanie ", task, " nie jest rozpoczęte"]
+    else lift $ printLines ["Zadanie ", task_desc task, " nie jest rozpoczęte"]
 
 finishedTask :: Task -> GameState -> Bool
 finishedTask t gameState = elem t $ finishedTasks gameState
@@ -41,3 +43,13 @@ noTaskYet t gameState = do
   let fts = finishedTasks gameState
   let ts = tasks gameState
   not $ elem t fts || elem t ts
+
+firstActiveTask :: [Task] -> GameState -> Maybe Task
+firstActiveTask taskOrder gameState = find evalTask taskOrder
+  where
+    evalTask :: Task -> Bool
+    evalTask currentTask = activeTask currentTask gameState
+
+lastFinishedTask :: [Task] -> GameState -> Maybe Task
+lastFinishedTask [] _ = Nothing
+lastFinishedTask taskOrder gameState = find (`finishedTask` gameState) (reverse taskOrder)

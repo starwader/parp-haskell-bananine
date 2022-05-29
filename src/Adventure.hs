@@ -14,6 +14,7 @@ import Defs.Npcs
 import Funcs.IOFuncs
 import Funcs.Interactions
 import Funcs.MoveFuncs
+import Defs.Tasks
 
 -- "The Quest of Bananine"
 --
@@ -69,8 +70,8 @@ gameLoop = do
       printDescription
       gameLoop
     "zadania" -> do
-      printListWithDescFail "Aktywne zadania:" "Brak aktywnych zadań" $ tasks s
-      printListWithDescFail "Zakończone zadania:" "Nie zakończyłeś jeszcze żadnego zadania" $ finishedTasks s
+      printListWithDescFail "Aktywne zadania:" "Brak aktywnych zadań" $ map task_desc (tasks s)
+      printListWithDescFail "Zakończone zadania:" "Nie zakończyłeś jeszcze żadnego zadania" $ map task_desc (finishedTasks s)
       gameLoop
     "ekwipunek" -> do
       printListWithDescFail "Ekwipunek:" "Twój ekwipunek jest pusty" $ inventory s
