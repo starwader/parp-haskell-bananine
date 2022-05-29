@@ -1,6 +1,8 @@
 module Main where
-
+import GHC.IO.Encoding
 import Adventure 
 
 main :: IO ()
-main = gameMain 
+main = do 
+    setLocaleEncoding utf8
+    gameMain 

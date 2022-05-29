@@ -18,21 +18,24 @@ gos d = do
     gameState <- get
     let oldLoc = currentLocation gameState
     let nextLocMaybe = go oldLoc d
+    tryChangeLocation nextLocMaybe
 
-    case nextLocMaybe of
-        Nothing -> lift $ printLines ["Nie możesz tędy iść", ""]
-        Just "fort" -> do
-            if not $ finishedTask taskKillBadGuys gameState then do
-                if itemInInventory "klucz_do_fortu" gameState then do
-                    modify (const gameState {currentLocation = "fort"})
-                    lift $ printLines killBadGuysText
-                    finishTask taskKillBadGuys
-                else
-                    lift $ printLines ["Potrzebujesz klucza, aby tu wejść"]
-            else do
-                modify (const gameState {currentLocation = "fort"})
-                printDescription
-        Just nextLoc -> do
-            modify (const gameState {currentLocation = nextLoc})
-            printDescription
-
+tryChangeLocation :: Maybe String -> GameStateIOT
+tryChangeLocation Nothing = do
+    lift $ printLines ["Nie możesz tędy iść", ""]
+tryChangeLocation (Just "fort") = do
+    gameState <- get
+    if not $ finishedTask taskKillBadGuys gameState then do
+        if itemInInventory "klucz_do_fortu" gameState then do
+            modify (const gameState {currentLocation = "fort"})
+            lift $ printLines killBadGuysText
+            finishTask taskKillBadGuys
+        else
+            lift $ printLines ["Potrzebujesz klucza, aby tu wejść"]
+    else do
+        modify (const gameState {currentLocation = "fort"})
+        printDescription
+tryChangeLocation (Just nextLoc) = do
+    gameState <- get
+    modify (const gameState {currentLocation = nextLoc})
+    printDescription

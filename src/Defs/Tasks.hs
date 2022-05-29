@@ -1,13 +1,20 @@
 module Defs.Tasks where
 
-type Task = String
+data TaskStatus = Inactive | Active | Completed deriving (Eq)
+data TaskName = TaskTrial | TaskTalkUebe | TaskKillBadGuys | TaskAttackUebe | TaskFindWallet deriving(Eq)
+type TaskDesc = String
+data Task = Task 
+    {
+        task_name :: TaskName,
+        task_desc :: TaskDesc
+    } deriving(Eq)
 
-taskTrial = "przejdź próbę w jaskini Próby"
+taskTrial = Task TaskTrial "przejdź próbę w jaskini Próby"
 
-taskTalkUebe = "porozmawiaj z Uebe"
+taskTalkUebe = Task TaskTalkUebe "porozmawiaj z Uebe"
 
-taskKillBadGuys = "zabij kłusowników"
+taskKillBadGuys = Task TaskKillBadGuys "zabij kłusowników"
 
-taskAttackUebe = "zaatakuj Uebe zaklęciem Potassium"
+taskAttackUebe = Task TaskAttackUebe "zaatakuj Uebe zaklęciem Potassium"
 
-taskFindWallet = "odzyskaj portfel Uebe z jaskini Kobry"
+taskFindWallet = Task TaskFindWallet "odzyskaj portfel Uebe z jaskini Kobry"

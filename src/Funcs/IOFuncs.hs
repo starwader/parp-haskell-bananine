@@ -15,7 +15,7 @@ printLines xs = putStr (unlines xs)
 
 printLocation :: Location -> IO ()
 printLocation l = do
-  let toPrint = "Znajdujesz sie w:"
+  let toPrint = "Znajdujesz się w:"
   printLines [toPrint, l]
 
 readCommand :: IO [String]
