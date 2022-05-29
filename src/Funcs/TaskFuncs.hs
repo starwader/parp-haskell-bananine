@@ -15,7 +15,7 @@ addTask task = do
   lift $ printLines ["", "    * zadanie rozpoczęte: " ++ task_desc task ++ " *", ""]
   modify (const gameState {tasks = task : tasks gameState})
 
--- zakonczenie zadania
+-- zakończenie zadania
 finishTask :: Task -> GameStateIOT
 finishTask task = do
   gameState <- get

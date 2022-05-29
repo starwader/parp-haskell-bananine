@@ -3,7 +3,7 @@ module Consts.TextConstants where
 
 introductionText =
   [ "Jest rok 1950.",
-    "Jesteś znanym poszukiwaczem przygód Robertem Gałązką.",
+    "Twoje imię to Robert Gałązka - jesteś znanym poszukiwaczem przygód .",
     "Niestety, podczas tej wyprawy w głąb afryki,",
     "twoja drużyna została schwytana przez tubylców.",
     "Jesteś skrępowany mocnymi sznurami,",
@@ -15,7 +15,7 @@ introductionText =
     "Nagle jednak w dziczy zauważasz goryla, który zaczyna",
     "szarżować na twoich oprawców.",
     "Przerażeni ludzie uciekają w popłochu,",
-    "Całkowicie o tobie zapominając.",
+    "całkowicie o tobie zapominając.",
     "Upadasz na ziemię i tracisz przytomność.",
     "",
     "...po jakimś czasie budzisz się...",
@@ -32,7 +32,6 @@ instructionsText =
     "rozmawiaj <Postać>                 -- rozmawiaj z postacią",
     "atakuj <Postać>                    -- zaatakuj postać",
     "ekwipunek                          -- wyświetl ekwipunek",
-    "postacie                           -- wyświetl postacie",
     "otwórz <Kontener>                  -- otwórz kontener",
     "umiejętności                       -- wyświetl umiejętności",
     "podnieś <Przedmiot>                -- podnieś przedmiot",
@@ -44,7 +43,7 @@ instructionsText =
   ]
 
 killBadGuysText =
-  [ "z każdej strony widzisz uzbrojonych po zęby kłusowników.",
+  [ "Z każdej strony widzisz uzbrojonych po zęby kłusowników.",
     "Na szczęście jesteś już pełnoprawnym wybrańcem i mistrzem sztuk walki Tiu-Fiu.",
     "Teraz dopełnia się twoje przeznaczenie.",
     "Kłusownicy otwierają ogień,",
@@ -101,7 +100,7 @@ jprobyDesc =
 
 jkobryDesc =
   [ "Wchodzisz do ciemnej i przerażającej jaskini Kobry.",
-    "Wyjście znajduje się na północy." -- inaczej zrobione niż w prologu
+    "Wyjście znajduje się na północy." -- inaczej niż w prologu
   ]
 
 dziedziniecDesc =
@@ -112,7 +111,7 @@ dziedziniecDesc =
 
 fortDesc =
   [ "Znajdujesz się na dziedzińcu fortu.",
-    "Na zachodzie znajduje się wyjście." -- inaczej niż w prologi
+    "Na zachodzie znajduje się wyjście." -- inaczej niż w prologu
   ]
 
 kamieniolomDesc =
@@ -153,7 +152,7 @@ kokoUebeQuestionYes =
   ]
 
 gnomDefault =
-  [ "SpAdAj StąD!!!1!!"
+  [ "SpAdAj StąD!!!!"
   ]
 
 gnomQuestion =
@@ -205,8 +204,6 @@ gnomBadAnswer =
   [ "Żaden z ciebie Bananine!",
     "GIŃ!"
   ]
-
--- no zepsuty karabin opcja - dla uproszczenia
 
 uebeNoKokoTask =
   [ "Ludzie nie mają czego szukać w tym świętym miejscu.",
