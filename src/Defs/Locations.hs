@@ -2,14 +2,14 @@ module Defs.Locations where
 
 import qualified Data.Map.Strict as M
 import Defs.Containers
-import Defs.Inventory
+import Defs.Items
 import Defs.Npcs
 
 -- lokalizacje
 
 type Location = String
 
--- określenie możliwych ścieżek 
+-- określenie możliwych ścieżek
 go :: Location -> Direction -> Maybe Location
 go "dżungla" North = Just "polanka"
 go "polanka" South = Just "dżungla"

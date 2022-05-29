@@ -5,8 +5,10 @@ import Control.Monad.Trans.Class
 import Control.Monad.Trans.State.Strict
 import qualified Data.Map.Strict as M
 import Defs.GameState
+import Defs.Items (itemExcaliber, itemKluczDoFortu, itemPortfelUebe)
 import Defs.Locations
 import Defs.Npcs
+import Defs.Skills (skillPotassiumSpell)
 import Defs.Tasks
 import Funcs.EndingFuncs
 import Funcs.IOFuncs
@@ -18,41 +20,41 @@ import Funcs.TaskFuncs
 -- logika walki z przeciwnikami
 
 attack :: Npc -> GameStateIOT
-attack "Koko" = do
+attack (Npc NpcKoko _) = do
   lift $ printLines kokoAttack
   die
-attack "Bobo" = do
+attack (Npc NpcBobo _) = do
   lift $ printLines boboAttack
   die
-attack "Andrzej" = do
+attack (Npc NpcAndrzej _) = do
   gameState <- get
-  if elem "Excaliber" $ inventory gameState
+  if elem itemExcaliber $ inventory gameState
     then do
       lift $ printLines andrzejKill
       let loc = currentLocation gameState
       case findLocationData loc $ locationsData gameState of
         Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
         Just locationData -> do
-          kill "Andrzej" loc
-          newItem "klucz_do_fortu"
+          kill npcAndrzej loc
+          newItem itemKluczDoFortu
     else do
       lift $ printLines andrzejAttackDefault
       die
-attack "Pająk" = do
+attack (Npc NpcPająk _) = do
   gameState <- get
-  if elem "zaklęcie Potassium" $ skills gameState
+  if elem skillPotassiumSpell $ skills gameState
     then do
       lift $ printLines pajakKill
       let loc = currentLocation gameState
       case findLocationData loc $ locationsData gameState of
         Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
         Just locationData -> do
-          kill "Pająk" loc
-          newItem "portfel"
+          kill npcPająk loc
+          newItem itemPortfelUebe
     else do
       lift $ printLines pajakAttackDefault
       die
-attack "Uebe" = do
+attack (Npc NpcUebe _) = do
   gameState <- get
   if activeTask taskAttackUebe gameState
     then do

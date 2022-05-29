@@ -16,7 +16,7 @@ kill npc loc = do
   case findLocationData loc $ locationsData gameState of
     Nothing -> lift $ printLines ["Taka lokalizacja nie istnieje", ""]
     Just locationData -> do
-      let newLocationData = locationData {npcs = filter (/= npc) $ items locationData}
+      let newLocationData = locationData {npcs = filter (/= npc) $ npcs locationData}
       modify
         ( const
             gameState

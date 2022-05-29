@@ -4,7 +4,7 @@ import Control.Monad.Trans.Class
 import Control.Monad.Trans.State.Strict
 import qualified Data.Map.Strict as M
 import Defs.GameState
-import Defs.Inventory
+import Defs.Items
 import Defs.Locations
 import Funcs.IOFuncs
 
@@ -25,20 +25,20 @@ newItem item = do
                     locationsData gameState
               }
         )
-      lift $ printLines ["Możesz podnieść nowy przedmiot: ", item]
+      lift $ printLines ["", "    * możesz podnieść nowy przedmiot: " ++ item_name item ++ " *", ""]
 
 -- dodanie nowego przedmiotu do ekwipunku
 addItemToInventory :: Item -> GameStateIOT
 addItemToInventory item = do
   gameState <- get
-  lift $ printLines ["", "    Przedmiot " ++ item ++ " został dodany do ekwipunku"]
+  lift $ printLines ["", "    * przedmiot " ++ item_name item ++ " został dodany do ekwipunku *", ""]
   modify (const gameState {inventory = item : inventory gameState})
 
 -- usunięcie przedmiotu z ekwipunku
 delItemFromInventory :: Item -> GameStateIOT
 delItemFromInventory item = do
   gameState <- get
-  lift $ printLines ["", "    Przedmiot " ++ item ++ " został usunięty z ekwipunku"]
+  lift $ printLines ["", "    * przedmiot " ++ item_name item ++ " został usunięty z ekwipunku *", ""]
   modify
     ( const
         gameState {inventory = filter (/= item) $ inventory gameState}

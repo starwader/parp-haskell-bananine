@@ -6,7 +6,7 @@ import qualified Data.Map.Strict as M
 import Defs.Containers
 import Defs.GameState
 import Defs.Interactions
-import Defs.Inventory
+import Defs.Items
 import Defs.Locations
 import Defs.Npcs
 import Defs.Tasks
@@ -39,14 +39,15 @@ interacts interaction cmdsarg = do
             Takeout -> containerInteracts interaction interacted (tail cmdsarg) locationData
 
 -- odłożenie przedmiotu
-puts :: Item -> Container -> LocationData -> GameStateIOT
-puts item container locationData = do
+puts :: String -> Container -> LocationData -> GameStateIOT
+puts itemName container locationData = do
   gameState <- get
-  if itemInInventory item gameState
-    then case containers locationData M.!? container of
+  case getItemByName (inventory gameState) itemName of
+    Nothing -> lift $ printInteractionError Put
+    Just item -> case containers locationData M.!? container of
       Nothing -> lift $ printInteractionError Open
       Just oldContainerData -> do
-        lift $ printLines ["Odłożyłeś przedmiot " ++ item ++ " do " ++ container]
+        lift $ printLines ["Odłożyłeś przedmiot " ++ item_name item ++ " do " ++ container]
         let newContainerData = oldContainerData {store = item : store oldContainerData}
         let newLocationData = locationData {containers = M.insert container newContainerData (containers locationData)}
         modify
@@ -60,32 +61,30 @@ puts item container locationData = do
                       $ locationsData gameState
                 }
           )
-    else lift $ printInteractionError Drop
 
 -- podniesienie przedmiotu z kontenera
-takeouts :: Item -> Container -> LocationData -> GameStateIOT
-takeouts item container locationData = do
+takeouts :: String -> Container -> LocationData -> GameStateIOT
+takeouts itemName container locationData = do
   gameState <- get
   case containers locationData M.!? container of
     Nothing -> lift $ printInteractionError Open
-    Just oldContainerData -> do
-      if elem item $ store oldContainerData
-        then do
-          lift $ printLines ["Wyciągnąłeś przedmiot " ++ item ++ " z " ++ container]
-          let newContainerData = oldContainerData {store = filter (/= item) (store oldContainerData)}
-          let newLocationData = locationData {containers = M.insert container newContainerData (containers locationData)}
-          modify
-            ( const
-                gameState
-                  { inventory = item : inventory gameState,
-                    locationsData =
-                      M.insert
-                        (currentLocation gameState)
-                        newLocationData
-                        $ locationsData gameState
-                  }
-            )
-        else lift $ printLines ["W " ++ container ++ " nie ma przedmiotu " ++ item]
+    Just oldContainerData -> case getItemByName (store oldContainerData) itemName of
+      Nothing -> lift $ printLines ["W " ++ container ++ " nie ma przedmiotu " ++ itemName]
+      Just item -> do
+        lift $ printLines ["Wyciągnąłeś przedmiot " ++ item_name item ++ " z " ++ container]
+        let newContainerData = oldContainerData {store = filter (/= item) (store oldContainerData)}
+        let newLocationData = locationData {containers = M.insert container newContainerData (containers locationData)}
+        modify
+          ( const
+              gameState
+                { inventory = item : inventory gameState,
+                  locationsData =
+                    M.insert
+                      (currentLocation gameState)
+                      newLocationData
+                      $ locationsData gameState
+                }
+          )
 
 -- interakcja z kontenerem
 containerInteracts :: Interaction -> String -> [String] -> LocationData -> GameStateIOT
@@ -121,15 +120,20 @@ opens :: String -> LocationData -> GameStateIOT
 opens containerName locationData = do
   case containers locationData M.!? containerName of
     Nothing -> lift $ printInteractionError Open
-    Just cont -> printListWithDescFail ("Zawartość " ++ containerName ++ ":") ("Kontener " ++ containerName ++ " jest pusty") $ store cont
+    Just cont ->
+      printListWithDescFail
+        ("Zawartość " ++ containerName ++ ":")
+        ("Kontener " ++ containerName ++ " jest pusty")
+        $ map item_name $ store cont
 
 -- upuszczenie przedmiotu
-drops :: Item -> LocationData -> GameStateIOT
-drops item locationData = do
+drops :: String -> LocationData -> GameStateIOT
+drops itemName locationData = do
   gameState <- get
   let inv = inventory gameState
-  if item `elem` inv
-    then do
+  case getItemByName inv itemName of
+    Nothing -> lift $ printInteractionError Drop
+    Just item -> do
       let newLocationData = locationData {items = item : items locationData}
       modify
         ( const
@@ -142,37 +146,39 @@ drops item locationData = do
                     $ locationsData gameState
               }
         )
-      lift $ printLines ["Upuściłeś ", item]
-    else lift $ printInteractionError Drop
+      lift $ printLines ["Upuściłeś ", item_name item]
 
 -- podniesienie przedmiotu
-pickups :: Item -> LocationData -> GameStateIOT
-pickups item locationData = do
+pickups :: String -> LocationData -> GameStateIOT
+pickups itemName locationData = do
   gameState <- get
-  if elem item $ items locationData
-    then do
+  case getItemByName (items locationData) itemName of
+    Nothing -> lift $ printInteractionError Pickup
+    Just item -> do
       let newLocationData = locationData {items = filter (/= item) $ items locationData}
       modify
         ( const
-        gameState
-          {inventory = item : inventory gameState,
-           locationsData = M.insert
-                             (currentLocation gameState) newLocationData
-                             $ locationsData gameState}
+            gameState
+              { inventory = item : inventory gameState,
+                locationsData =
+                  M.insert
+                    (currentLocation gameState)
+                    newLocationData
+                    $ locationsData gameState
+              }
         )
-      lift $ printLines ["Podniosłeś ", item]
-    else lift $ printInteractionError Pickup
+      lift $ printLines ["Podniosłeś " ++ item_name item]
 
 -- rozmowa z npc
-talks :: Npc -> LocationData -> GameStateIOT
-talks npc locationData = do
-  if elem npc $ npcs locationData
-    then talk npc
-    else lift $ printInteractionError Talk
+talks :: String -> LocationData -> GameStateIOT
+talks npcName locationData = do
+  case getNpcByName (npcs locationData) npcName of
+    Just foundNpc -> talk foundNpc
+    Nothing -> lift $ printInteractionError Talk
 
 -- atak na npc
-attacks :: Npc -> LocationData -> GameStateIOT
-attacks npc locationData = do
-  if elem npc $ npcs locationData
-    then attack npc
-    else lift $ printInteractionError Attack
+attacks :: String -> LocationData -> GameStateIOT
+attacks npcName locationData = do
+  case getNpcByName (npcs locationData) npcName of
+    Just foundNpc -> attack foundNpc
+    Nothing -> lift $ printInteractionError Attack

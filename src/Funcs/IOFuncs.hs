@@ -7,7 +7,9 @@ import Data.List.Split
 import qualified Data.Map.Strict as M
 import Defs.GameState
 import Defs.Interactions
+import Defs.Items
 import Defs.Locations
+import Defs.Npcs
 import System.IO
 
 -- wypisanie listy ciągów znaków
@@ -34,9 +36,9 @@ printListWithDesc :: String -> [String] -> GameStateIOT
 printListWithDesc desc toPrintList = do
   if not (null toPrintList)
     then lift $ printLines $ desc : map ("- " ++) toPrintList
-    else lift $ putStr "" 
+    else lift $ putStr ""
 
--- wypisanie listy z opisem z określeniem komunikatu niepowodzenia 
+-- wypisanie listy z opisem z określeniem komunikatu niepowodzenia
 printListWithDescFail :: String -> String -> [String] -> GameStateIOT
 printListWithDescFail desc failMsg toPrintList = do
   if not (null toPrintList)
@@ -58,8 +60,8 @@ printDescription = do
       lift $ printLines $ desc locationData
       lift $ printLines $ additionalDesc locationData
       lift $ printLines [""]
-      printListWithDesc "Możesz podnieść:" $ items locationData
-      printListWithDesc "Dostępne postacie:" $ npcs locationData
+      printListWithDesc "Możesz podnieść:" $ map item_name $ items locationData
+      printListWithDesc "Dostępne postacie:" $ map npc_name (npcs locationData)
       printListWithDesc "Kontenery:" $ M.keys $ containers locationData
 
 printInteractionError :: Interaction -> IO ()

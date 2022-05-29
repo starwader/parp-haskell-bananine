@@ -10,5 +10,5 @@ import Funcs.IOFuncs
 addSkill :: Skill -> GameStateIOT
 addSkill skill = do
   gameState <- get
-  lift $ printLines ["", "    Nowa umiejętność: " ++ skill]
+  lift $ printLines ["", "    * nowa umiejętność: " ++ skill_name skill ++ " *", ""]
   modify (const gameState {skills = skill : skills gameState})

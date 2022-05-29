@@ -61,7 +61,7 @@ dzunglaDesc =
   ]
 
 rozwidlenieDesc =
-  [ "Zbliżasz się do rozwidlenia świeżki.",
+  [ "Zbliżasz się do rozwidlenia ścieżki.",
     "Na wschodzie wznosi się spory fort kłusowników,",
     "zaś na zachodzie znajduje się polanka Goryli.",
     "Na północy widzisz mroczny kamieniołom.",
@@ -187,6 +187,19 @@ gnomGoodAnswer =
     "<Gnom uderza cię w głowę i tracisz przytomność>",
     "<Po jakimś czasie budzisz się w klasztorze Tiu-Fiu>"
   ]
+gnomTrialFinished = 
+  [
+    "<Gnom uderza cię w głowę i tracisz przytomność>",
+    "<Po jakimś czasie budzisz się w klasztorze Tiu-Fiu>"
+  ]
+gnomSeenGun =
+  [
+    "<W ostatnim momencie przypominasz sobie o karabinie od Bobo>",
+    "<Jednym ruchem wyciągasz karabin i przystawiasz go do głowy gnoma>",
+    "Zaraz zaraz, skąd to masz?",
+    "To legendarny złoty karabin mojego dziadka!",
+    "Oddawaj to, i wynoś się"
+  ]
 
 gnomBadAnswer =
   [ "Żaden z ciebie Bananine!",
@@ -271,6 +284,19 @@ boboDefault =
     "BANANA!"
   ]
 
+boboBananaQuestion =
+  [ "BANANA!!! DAJ BANANA!",
+    "<tak/nie>" 
+  ]
+
+boboRevealGun = 
+  [ "DOBRE! BANANA!", 
+    "<ucieszony Bobo wskazuje na broń ukrytą w trawie>"
+  ]
+
+boboSad = 
+  [ "Bobo chce banan :(" ]
+
 andrzejDefault =
   [ "Nie rozmawiam z takimi jak ty!",
     "Wynoś się stąd, albo przerobię cię na dywan!"
@@ -298,7 +324,7 @@ boboAttack =
   ]
 
 kokoAttack =
-  [ "Koko patrzy na ciebie zazkoczony,",
+  [ "Koko patrzy na ciebie zaskoczony,",
     "jednym szybkim ruchem wyrywa ci wszystkie kończyny."
   ]
 

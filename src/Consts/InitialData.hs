@@ -4,7 +4,9 @@ import Consts.TextConstants
 import qualified Data.Map.Strict as M
 import Defs.Containers
 import Defs.GameState
+import Defs.Items (itemBanan, itemExcaliber, itemKluczDoFortu, itemZgniłyBanan, itemTajemniczyKlucz)
 import Defs.Locations
+import Defs.Npcs (npcAndrzej, npcBobo, npcGnom, npcKoko, npcPająk, npcUebe)
 import Defs.Tasks
 
 -- pomocnicze, puste LocationData i Container
@@ -28,12 +30,12 @@ initialLocationsData =
   M.fromList
     [ ( "dżungla",
         emptyLocationData
-          { items = ["banan"],
+          { items = [itemBanan],
             containers =
               M.fromList
                 [ ( "beczka",
                     emptyContainer
-                      { store = ["zgniły_banan"]
+                      { store = [itemZgniłyBanan]
                       }
                   )
                 ],
@@ -42,13 +44,13 @@ initialLocationsData =
       ),
       ( "polanka",
         emptyLocationData
-          { npcs = ["Koko", "Bobo"],
+          { npcs = [npcKoko, npcBobo],
             desc = polankaDesc
           }
       ),
       ( "klasztor",
         emptyLocationData
-          { npcs = ["Uebe"],
+          { npcs = [npcUebe],
             desc = klasztorDesc
           }
       ),
@@ -59,8 +61,8 @@ initialLocationsData =
               M.fromList
                 [ ( "skrzynia",
                     emptyContainer
-                      { store = ["Excaliber"],
-                        itemRequired = Just "klucz"
+                      { store = [itemExcaliber],
+                        itemRequired = Just itemTajemniczyKlucz
                       }
                   )
                 ]
@@ -68,7 +70,7 @@ initialLocationsData =
       ),
       ( "jpróby",
         emptyLocationData
-          { npcs = ["Gnom"],
+          { npcs = [npcGnom],
             desc = jprobyDesc
           }
       ),
@@ -79,13 +81,13 @@ initialLocationsData =
       ),
       ( "jkobry",
         emptyLocationData
-          { npcs = ["Pająk"],
+          { npcs = [npcPająk],
             desc = jkobryDesc
           }
       ),
       ( "dziedziniec",
         emptyLocationData
-          { npcs = ["Andrzej"],
+          { npcs = [npcAndrzej],
             desc = dziedziniecDesc
           }
       ),

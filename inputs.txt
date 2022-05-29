@@ -1,0 +1,44 @@
+podnieś banan
+otwórz beczka
+n
+rozmawiaj Bobo
+tak
+podnieś zepsuty_karabin
+rozmawiaj Koko
+tak
+w
+rozmawiaj Uebe
+n
+rozmawiaj Gnom
+człowiek
+rozmawiaj Uebe
+atakuj Uebe
+w
+e
+e
+s
+rozmawiaj Pająk
+atakuj Pająk
+podnieś portfel
+n
+w
+w
+rozmawiaj Uebe
+e
+e
+n
+otwórz skrzynia
+wyjmij Excaliber z skrzynia
+s
+e
+rozmawiaj Andrzej
+e
+atakuj Andrzej
+podnieś klucz_do_fortu
+e
+w
+w
+w
+rozmawiaj Koko
+w
+rozmawiaj Uebe

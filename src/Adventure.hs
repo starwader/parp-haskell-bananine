@@ -8,13 +8,14 @@ import Control.Monad.Trans.State.Strict
 import qualified Data.Map.Strict as M
 import Defs.GameState
 import Defs.Interactions
-import Defs.Inventory
+import Defs.Items
 import Defs.Locations
 import Defs.Npcs
 import Funcs.IOFuncs
 import Funcs.Interactions
 import Funcs.MoveFuncs
 import Defs.Tasks
+import Defs.Skills
 
 -- "The Quest of Bananine"
 --
@@ -74,10 +75,10 @@ gameLoop = do
       printListWithDescFail "Zakończone zadania:" "Nie zakończyłeś jeszcze żadnego zadania" $ map task_desc (finishedTasks s)
       gameLoop
     "ekwipunek" -> do
-      printListWithDescFail "Ekwipunek:" "Twój ekwipunek jest pusty" $ inventory s
+      printListWithDescFail "Ekwipunek:" "Twój ekwipunek jest pusty" $ map item_name (inventory s)
       gameLoop
     "umiejętności" -> do
-      printListWithDescFail "Umiejętności:" "Nie masz żadnych umiejętności :(" $ skills s
+      printListWithDescFail "Umiejętności:" "Nie masz żadnych umiejętności :(" $ map skill_name (skills s)
       gameLoop
     "koniec" -> return ()
     _ -> do

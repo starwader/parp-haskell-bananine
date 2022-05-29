@@ -31,7 +31,7 @@ library
       Defs.Containers
       Defs.GameState
       Defs.Interactions
-      Defs.Inventory
+      Defs.Items
       Defs.Locations
       Defs.Npcs
       Defs.Skills

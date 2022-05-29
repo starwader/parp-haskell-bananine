@@ -2,17 +2,17 @@ module Funcs.TaskFuncs where
 
 import Control.Monad.Trans.Class
 import Control.Monad.Trans.State.Strict
+import Data.List (find)
+import Data.Maybe (listToMaybe)
 import Defs.GameState
 import Defs.Tasks
 import Funcs.IOFuncs
-import Data.Maybe (listToMaybe)
-import Data.List (find)
 
 -- dodanie zadania
 addTask :: Task -> GameStateIOT
 addTask task = do
   gameState <- get
-  lift $ printLines ["", "    Rozpoczęto zadanie: " ++ task_desc task]
+  lift $ printLines ["", "    * zadanie rozpoczęte: " ++ task_desc task ++ " *", ""]
   modify (const gameState {tasks = task : tasks gameState})
 
 -- zakonczenie zadania
@@ -21,7 +21,7 @@ finishTask task = do
   gameState <- get
   if elem task $ tasks gameState
     then do
-      lift $ printLines ["", "    Zadanie zakończone: " ++ task_desc task]
+      lift $ printLines ["", "    * zadanie zakończone: " ++ task_desc task ++ " *", ""]
       modify
         ( const
             gameState
@@ -42,18 +42,21 @@ activeTask t gameState = elem t $ tasks gameState
 -- sprawdzenie czy zadanie jeszcze nie istnieje
 noTaskYet :: Task -> GameState -> Bool
 noTaskYet t gameState = do
-  let fts = finishedTasks gameState
-  let ts = tasks gameState
-  not $ elem t fts || elem t ts
+  not $ finishedTask t gameState || activeTask t gameState
 
--- 
+-- zwraca pierwsze aktywne zadanie wg. podanej kolejności
+-- pierwszy parametr: kolejność wykonywania zadań
+-- drugi parametr: stan gry
 firstActiveTask :: [Task] -> GameState -> Maybe Task
 firstActiveTask taskOrder gameState = find evalTask taskOrder
   where
     evalTask :: Task -> Bool
     evalTask currentTask = activeTask currentTask gameState
 
--- 
+-- zwraca ostatnie zakończone zadanie wg. podanej kolejności
+-- pierwszy parametr: kolejność wykonywania zadań
+-- drugi parametr: stan gry
 lastFinishedTask :: [Task] -> GameState -> Maybe Task
 lastFinishedTask [] _ = Nothing
-lastFinishedTask taskOrder gameState = find (`finishedTask` gameState) (reverse taskOrder)
+lastFinishedTask taskOrder gameState =
+   find (`finishedTask` gameState) (reverse taskOrder)
