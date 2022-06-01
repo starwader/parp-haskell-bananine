@@ -3,9 +3,9 @@ module Consts.TextConstants where
 
 introductionText =
   [ "Jest rok 1950.",
-    "Twoje imię to Robert Gałązka - jesteś znanym poszukiwaczem przygód .",
-    "Niestety, podczas tej wyprawy w głąb afryki,",
-    "twoja drużyna została schwytana przez tubylców.",
+    "Twoje imię to Robert Gałązka - jesteś znanym poszukiwaczem przygód.",
+    "Niestety, podczas tej wyprawy w głąb Afryki,",
+    "twoja drużyna została schwytana przez tubylców.",  
     "Jesteś skrępowany mocnymi sznurami,",
     "ostatnio straciłeś przytomność od mocnego uderzenia",
     "jakąś dziwną bronią obuchową.",

@@ -69,6 +69,7 @@ talk (Npc NpcGnom _) = do
             lift $ printLines gnomSeenGun
             delItemFromInventory itemZepsutyKarabin
             lift $ printLines gnomTrialFinished
+            gameState <- get
             modify (\x -> teleports gameState "klasztor")
             finishTask taskTrial
             printDescription
